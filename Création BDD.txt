@@ -1,0 +1,202 @@
+---Création BDD
+-- à écrire dans Wamp / MySQL / Console MySQL 
+
+
+-- ****** POUR CREER LA BDD PRINCIPALE ******
+
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS BDD_EDE;
+USE BDD_EDE;
+
+
+-- Création de la table "Elevage"
+CREATE TABLE IF NOT EXISTS Elevage (
+    NUM_NAT VARCHAR(20) PRIMARY KEY
+);
+
+-- Création de la table "Race" dans la base de données "BDD_EDE"
+CREATE TABLE BDD_EDE.Race (
+    COD_RACE VARCHAR(2) PRIMARY KEY,
+    LIB_COURT VARCHAR(50),
+    LIB_LONG VARCHAR(100)
+);
+
+-- Création de la table "Animaux"
+CREATE TABLE BDD_EDE.Animaux (
+    COD_PAYS VARCHAR(2),
+    NUM_NAT VARCHAR(20),
+    NOM VARCHAR(50) DEFAULT NULL,
+    TYP_RACE VARCHAR(2),
+    SEXE VARCHAR(1),
+    DAT_NAISS DATETIME,
+    COD_PAYS_NAISS VARCHAR(2),
+    NUM_EXP_NAISS VARCHAR(20),
+    COD_PAYS_PERE VARCHAR(2) DEFAULT NULL,
+    NUM_NAT_PERE VARCHAR(20) DEFAULT NULL,
+    TYP_RACE_PERE VARCHAR(20) DEFAULT NULL,
+    COD_PAYS_MERE VARCHAR(2) DEFAULT NULL,
+    NUM_NAT_MERE VARCHAR(20) DEFAULT NULL,
+    TYP_RACE_MERE VARCHAR(20) DEFAULT NULL,
+    NUM_TRA VARCHAR(4),
+    PRIMARY KEY (NUM_TRA, NUM_NAT),
+    FOREIGN KEY (TYP_RACE) REFERENCES BDD_EDE.Race(COD_RACE),
+    FOREIGN KEY (NUM_NAT) REFERENCES BDD_EDE.Elevage(NUM_NAT)
+);
+
+
+
+-- Insertion des valeurs dans la table "Elevages"
+
+INSERT INTO BDD_EDE.Elevage (NUM_NAT) VALUES
+(99275011), (99124091), (99190016), (99268099), (99292036), (99296082), (99342070), (99370171), (99374024), (99672102);
+
+
+
+-- Insertion des valeurs dans la table "Race"
+
+INSERT INTO BDD_EDE.Race (COD_RACE, LIB_COURT, LIB_LONG) VALUES
+(0, 'Inconnu', 'Race inconnue'),
+(10, 'Bison', 'BISON'),
+(12, 'Abondance', 'ABONDANCE'),
+(14, 'Aubrac', 'AUBRAC'),
+(15, 'Jersiaise', 'JERSIAISE'),
+(17, 'Angus', 'ANGUS'),
+(18, 'Ayrshire', 'AYRSHIRE'),
+(19, 'Pie Rouge', 'PIE ROUGE'),
+(20, 'Buffle', 'BUFFLE'),
+(21, 'Brune', 'BRUNE'),
+(23, 'Salers', 'SALERS'),
+(24, 'Bazadaise', 'BAZADAISE'),
+(25, 'Blanc Bleu', 'BLANC BLEU'),
+(26, 'Bordelaise', 'BORDELAISE'),
+(29, 'Bretonne P.N.', 'BRETONNE PIE NOIRE'),
+(30, 'Aurochs', 'AUROCHS RECONSTITUE'),
+(31, 'Tarentaise', 'TARENTAISE'),
+(32, 'Chianina', 'CHIANINA'),
+(33, 'Lourdaise', 'LOURDAISE'),
+(34, 'Limousine', 'LIMOUSINE'),
+(35, 'Simmental Fr.', 'SIMMENTAL FRANCAISE'),
+(36, 'Corse', 'CORSE'),
+(37, 'Raco di Biou', 'RaçO DI BIOU'),
+(38, 'Charolaise', 'CHAROLAISE'),
+(39, 'Croise', 'Croisé'),
+(41, 'Rouge d Pres', 'ROUGE DES PRES'),
+(42, 'Dairy Short.', 'DAIRY SHORTHORN'),
+(43, 'Armoricaine', 'ARMORICAINE'),
+(44, 'Divers Lait', 'Autres races traites étrangères'),
+(45, 'South Devon', 'SOUTH DEVON'),
+(46, 'Montbéliarde', 'MONTBELIARDE'),
+(48, 'Divers Viande', 'Autres races allaitantes étrangères'),
+(49, 'Marchigiana', 'MARCHIGIANA'),
+(51, 'De Combat', 'DE COMBAT (ESPAGNOLE BRAVA)'),
+(52, 'Bleue Du Nord', 'BLEUE DU NORD'),
+(53, 'Villard Lans', 'VILLARD DE LANS'),
+(54, 'N‘ Dama', 'N‘ DAMA'),
+(55, 'Creole', 'CREOLE'),
+(56, 'Normande', 'NORMANDE'),
+(57, 'Vosgienne', 'VOSGIENNE'),
+(58, 'Maraichine', 'MARAICHINE'),
+(61, 'Bearnaise', 'BEARNAISE'),
+(63, 'Rouge Flamande', 'ROUGE FLAMANDE'),
+(65, 'Ferrandaise', 'FERRANDAISE'),
+(66, 'Prim’Holstein', 'PRIM’ HOLSTEIN'),
+(69, 'Froment Leon', 'FROMENT DU LEON'),
+(71, 'Parthenaise', 'PARTHENAISE'),
+(72, 'Gasconne', 'GASCONNE'),
+(73, 'Galloway', 'GALLOWAY'),
+(74, 'Guernesey', 'GUERNESEY'),
+(75, 'Piemontaise', 'PIEMONTAISE'),
+(76, 'Nantaise', 'NANTAISE'),
+(77, 'Mirandaise', 'MIRANDAISE (Gasconne aréolée)'),
+(78, 'Gelbvieh', 'GELBVIEH'),
+(79, 'Blonde Aquit.', 'BLONDE D’AQUITAINE'),
+(81, 'Brahma', 'BRAHMA'),
+(82, 'Herens', 'HERENS'),
+(85, 'Hereford', 'HEREFORD'),
+(86, 'Highland Cattle', 'HIGHLAND CATTLE'),
+(88, 'Saosnoise', 'SAOSNOISE'),
+(90, 'Zebu', 'ZEBU'),
+(92, 'Canadienne', 'CANADIENNE'),
+(95, 'Inra 95', 'INRA 95'),
+(97, 'Casta', 'CASTA (AURE et ST GIRONS)');
+
+
+
+
+
+-- Insertion des valeurs dans la table "Animaux"
+
+INSERT INTO BDD_EDE.Animaux (COD_PAYS, NUM_NAT, NOM, TYP_RACE, SEXE, DAT_NAISS, COD_PAYS_NAISS, NUM_EXP_NAISS, COD_PAYS_PERE, NUM_NAT_PERE, TYP_RACE_PERE, COD_PAYS_MERE, NUM_NAT_MERE, TYP_RACE_MERE, NUM_TRA)
+VALUES
+('FR', '9904022308', 'UBER', '38', '1', '2023-01-03 00:00:00', 'FR', '99275011', 'FR', '9924595810', '38', 'FR', '9904022181', '38', '2308'),
+('FR', '9904022309', 'UGGLY', '38', '2', '2023-01-12 00:00:00', 'FR', '99275011', 'FR', '9924595810', '38', 'FR', '9904022179', '38', '2309'),
+('FR', '9904022310', 'ULLA', '38', '2', '2023-01-13 00:00:00', 'FR', '99275011', 'FR', '9902666575', '38', 'FR', '9904022229', '38', '2310'),
+('FR', '9904022311', 'ULANA', '38', '2', '2023-01-21 00:00:00', 'FR', '99275011', 'FR', '9911118841', '38', 'FR', '9904022207', '38', '2311'),
+('FR', '9904022312', 'UDADA', '38', '2', '2023-01-22 00:00:00', 'FR', '99275011', 'FR', '9919103201', '38', 'FR', '9904022230', '38', '2312'),
+('FR', '9904022313', 'UNEDEPLUS', '38', '2', '2023-01-22 00:00:00', 'FR', '99275011', 'FR', '9919103201', '38', 'FR', '9904022184', '38', '2313'),
+('FR', '9904022399', 'UDERZO', '38', '1', '2023-01-28 00:00:00', 'FR', '99275011', 'FR', '9919103201', '38', 'FR', '9904022195', '38', '2399'),
+
+('FR', '9904095790', NULL, '39', '1', '2023-01-08 00:00:00', 'FR', '99124091', NULL, NULL, '25', 'FR', '9904095541', '56', '5790'),
+('FR', '9904095791', NULL, '39', '2', '2023-01-08 00:00:00', 'FR', '99124091', NULL, NULL, '66', 'FR', '9904095569', '39', '5791'),
+('FR', '9904095792', NULL, '39', '2', '2023-01-16 00:00:00', 'FR', '99124091', NULL, NULL, '25', 'FR', '9904095447', '39', '5792'),
+('FR', '9904095793', NULL, '15', '2', '2023-01-16 00:00:00', 'FR', '99124091', NULL, NULL, '15', 'FR', '9904095595', '15', '5793'),
+('FR', '9904095794', NULL, '39', '2', '2023-01-15 00:00:00', 'FR', '99124091', NULL, NULL, '25', 'FR', '9904095261', '39', '5794'),
+('FR', '9904095795', NULL, '39', '1', '2023-01-22 00:00:00', 'FR', '99124091', NULL, NULL, '25', 'FR', '9904095479', '39', '5795'),
+('FR', '9904122722', 'UNIQUE', '79', '2', '2023-01-10 00:00:00', 'FR', '99190016', 'FR', '9937800349', '79', 'FR', '9932742433', '79', '2722'),
+('FR', '9904122723', NULL, '79', '1', '2023-01-11 00:00:00', 'FR', '99190016', 'FR', '9943396600', '79', 'FR', '9904122677', '79', '2723'),
+('FR', '9904158437', 'UNO', '79', '1', '2023-01-02 00:00:00', 'FR', '99268099', 'FR', '9915020669', '79', 'FR', '9964474727', '79', '8437'),
+('FR', '9904169631', 'MARCUS', '41', '1', '2023-01-04 00:00:00', 'FR', '99292036', 'FR', '9925603382', '41', 'FR', '9938767786', '41', '9631'),
+
+('FR', '9904175249', 'ULYSSE', '34', '1', '2023-01-11 00:00:00', 'FR', '99296082', 'FR', '9904175212', '34', 'FR', '9904175172', '34', '5249'),
+('FR', '9904190105', NULL, '39', '2', '2023-01-08 00:00:00', 'FR', '99342070', 'FR', '9944535211', '38', 'FR', '9920590523', '39', '2105'),
+('FR', '9904302175', NULL, '66', '1', '2023-01-09 00:00:00', 'FR', '99370171', 'FR', '9974973537', '66', 'FR', '9904301760', '66', '2175'),
+('FR', '9904302176', NULL, '56', '1', '2023-01-17 00:00:00', 'FR', '99370171', 'FR', '9947295105', '56', 'FR', '9904301847', '56', '2176'),
+('FR', '9904302177', 'ULISSE', '56', '2', '2023-01-19 00:00:00', 'FR', '99370171', 'FR', '9970822884', '56', 'FR', '9904301741', '56', '2177'),
+('FR', '9904302178', NULL, '39', '1', '2023-01-22 00:00:00', 'FR', '99370171', 'FR', '9960076998', '34', 'FR', '9904301821', '56', '2178'),
+('FR', '9904302179', NULL, '56', '1', '2023-01-27 00:00:00', 'FR', '99370171', 'FR', '9922361136', '56', 'FR', '9904301641', '56', '2179'),
+('FR', '9904304616', NULL, '34', '2', '2023-01-22 00:00:00', 'FR', '99374024', 'FR', '9934109355', '34', 'FR', '9904304598', '34', '4616'),
+('FR', '9904304617', NULL, '34', '1', '2023-01-22 00:00:00', 'FR', '99374024', 'FR', '9915353586', '34', 'FR', '9904304603', '34', '4617'),
+('FR', '9904304618', NULL, '34', '1', '2023-01-27 00:00:00', 'FR', '99374024', NULL, NULL, '34', 'FR', '9904304600', '34', '4618'),
+('FR', '9904328944', NULL, '66', '1', '2023-01-11 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328625', '66', '8944'),
+('FR', '9904328945', NULL, '66', '1', '2023-01-16 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328631', '66', '8945'),
+('FR', '9904328946', NULL, '66', '1', '2023-01-05 00:00:00', 'FR', '99672102', 'FR', '9904328364', '66', 'FR', '9904328618', '66', '8946'),
+('FR', '9904329053', 'ULTIMA', '66', '2', '2023-01-04 00:00:00', 'FR', '99672102', 'FR', '9948001750', '66', 'FR', '9904328446', '66', '9053'),
+('FR', '9904329054', 'UNICOPA', '66', '2', '2023-01-02 00:00:00', 'FR', '99672102', 'FR', '9904328364', '66', 'FR', '9904328619', '66', '9054'),
+('FR', '9904329055', 'UBUESQUE', '66', '2', '2023-01-04 00:00:00', 'FR', '99672102', 'FR', '9928823654', '66', 'FR', '9904328340', '66', '9055'),
+('FR', '9904329056', 'UEFA', '66', '2', '2023-01-05 00:00:00', 'FR', '99672102', 'FR', '9904328364', '66', 'FR', '9904328628', '66', '9056'),
+('FR', '9904329057', 'UHU', '66', '2', '2023-01-11 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328532', '66', '9057'),
+('FR', '9904329058', 'UNEPLOMBE', '66', '2', '2023-01-11 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328640', '66', '9058'),
+('FR', '9904329059', 'UCOCOTTE', '66', '2', '2023-01-16 00:00:00', 'FR', '99672102', 'FR', '9902899681', '66', 'FR', '9904328262', '66', '9059'),
+('FR', '9904329060', 'UNICOLORE', '66', '2', '2023-01-20 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328629', '66', '9060'),
+('FR', '9904329061', 'URANUS', '66', '2', '2023-01-20 00:00:00', 'FR', '99672102', 'FR', '9904328551', '66', 'FR', '9904328623', '66', '9061');
+
+
+
+
+
+
+-- ***** POUR CREER LA BDD ID/MDP ELEVEURS *****
+
+CREATE DATABASE IF NOT EXISTS bdd_elevages;
+USE bdd_elevages;
+
+CREATE TABLE utilisateurs (
+    id VARCHAR(20) PRIMARY KEY,
+    nom_elevage VARCHAR(255) UNIQUE DEFAULT NULL,
+    mdp VARCHAR(20) DEFAULT NULL
+);
+
+USE bdd_elevages;
+
+INSERT IGNORE INTO utilisateurs (id)
+SELECT DISTINCT id FROM (
+    SELECT LEFT(NUM_NAT, 8) AS id FROM BDD_EDE.Animaux WHERE NUM_NAT IS NOT NULL
+    UNION
+    SELECT LEFT(NUM_NAT_PERE, 8) AS id FROM BDD_EDE.Animaux WHERE NUM_NAT_PERE IS NOT NULL
+    UNION
+    SELECT LEFT(NUM_NAT_MERE, 8) AS id FROM BDD_EDE.Animaux WHERE NUM_NAT_MERE IS NOT NULL
+    UNION
+    SELECT NUM_EXP_NAISS AS id FROM BDD_EDE.Animaux
+) AS subquery;
+
+
