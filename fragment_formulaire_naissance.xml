@@ -22,7 +22,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="Notification de naissance"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <!-- Numéro de travail -->
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="40dp"
         android:text="Numéro de travail :"
         android:textSize="16sp" />
 
@@ -45,7 +45,6 @@
         android:background="@drawable/border_shape"
         android:hint="  ex : 2308"
         android:maxLength="4"
-        android:minLength="4"
         android:inputType="number" />
 
     <!-- Nom du veau -->
@@ -89,7 +88,6 @@
         android:inputType="number"
         android:hint="  ex : 38"
         android:maxLength="2"
-        android:minLength="2"
         android:background="@drawable/border_shape"/>
 
     <!-- Sexe -->
@@ -130,7 +128,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:hint="Choisir une date"
-        android:background="@drawable/border_shape"/>
+        android:background="@drawable/border_shape"
+        style="@style/ButtonDateFormulaire"/>
 
 
 
@@ -154,7 +153,6 @@
         android:background="@drawable/border_shape"
         android:hint="  ex : FR"
         android:maxLength="2"
-        android:minLength="2"
         android:inputType="textCapCharacters" />
 
     <!-- Numéro national du père -->
@@ -177,7 +175,6 @@
         android:inputType="number"
         android:hint="  ex : 9924595810"
         android:maxLength="10"
-        android:minLength="10"
         android:background="@drawable/border_shape"/>
 
     <!-- Code race du père -->
@@ -200,7 +197,6 @@
         android:background="@drawable/border_shape"
         android:hint="  ex : 38"
         android:maxLength="2"
-        android:minLength="2"
         android:inputType="number" />
 
     <!-- Code pays de la mère -->
@@ -223,7 +219,6 @@
         android:background="@drawable/border_shape"
         android:hint="  ex : FR"
         android:maxLength="2"
-        android:minLength="2"
         android:inputType="textCapCharacters" />
 
     <!-- Numéro national de la mère -->
@@ -246,7 +241,6 @@
         android:inputType="number"
         android:hint="  ex : 9924595810"
         android:maxLength="10"
-        android:minLength="10"
         android:background="@drawable/border_shape"/>
 
     <!-- Code race de la mère-->
@@ -269,28 +263,29 @@
         android:inputType="number"
         android:hint="  ex : 38"
         android:maxLength="2"
-        android:minLength="2"
         android:background="@drawable/border_shape"/>
 
     <!-- Bouton soumettre -->
     <Button
         android:id="@+id/buttonSubmit"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
+        android:layout_gravity="center_horizontal"
         style = "@style/ButtonEleveur"
         android:text="Soumettre" />
 
     <!-- Bouton effacer -->
     <Button
         android:id="@+id/buttonEffacer"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="16dp"
+        android:layout_gravity="center_horizontal"
         style="@style/ButtonEffacerFormulaire"
         android:text="Effacer" />
 
