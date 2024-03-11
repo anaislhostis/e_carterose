@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FormulaireMortFragment">
+
+    <!-- Titre du formulaire -->
+    <TextView
+        android:id="@+id/TitreFormMort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="Notification de mort"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Numéro de travail -->
+    <TextView
+        android:id="@+id/textViewNumNat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="90dp"
+        android:text="Numéro national de l'animal mort :"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editTextNumNat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 9924595810"
+        android:maxLength="10"
+        android:inputType="number" />
+
+    <!-- Bouton soumettre -->
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center_horizontal"
+        style = "@style/ButtonEleveur"
+        android:text="Soumettre" />
+
+    <!-- Bouton effacer -->
+    <Button
+        android:id="@+id/buttonEffacer"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/ButtonEffacerFormulaire"
+        android:text="Effacer" />
+
+</LinearLayout>
