@@ -54,6 +54,7 @@ public class FormulaireNaissanceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_formulaire_naissance, container, false);
 
+        // Acces à la BDD
         db = new DatabaseAccess(requireContext());
 
         // Récupérer les références des editText/Spinner/Boutton du formulaire
@@ -120,6 +121,24 @@ public class FormulaireNaissanceFragment extends Fragment {
             public void onClick(View v) {
                 //Appeler la fonction de sauvgarde des données dans la bdd (insertion d'une nouvelle ligne)
                 sauvegarderDonneesFormulaire();
+
+                // Réinitialiser le texte de tous les EditText
+                editTextNom.setText("");
+                editTextNumTra.setText("");
+                editTextCodeRace.setText("");
+                buttonPickDateNais.setText("Choisir une date");
+                editTextCodePaysPere.setText("");
+                editTextNumNatPere.setText("");
+                editTextCodeRacePere.setText("");
+                editTextCodePaysMere.setText("");
+                editTextNumNatMere.setText("");
+                editTextCodeRaceMere.setText("");
+
+                // Sélectionner le premier élément dans le Spinner (s'il y en a)
+                if (spinnerSexe.getAdapter() != null && spinnerSexe.getAdapter().getCount() > 0) {
+                    spinnerSexe.setSelection(0);
+                }
+
             }
         });
 
