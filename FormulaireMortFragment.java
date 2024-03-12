@@ -2,6 +2,8 @@ package com.example.e_carterose;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,12 +15,18 @@ import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.example.e_carterose.databinding.FragmentFormulaireMortBinding;
+
+
+
 public class FormulaireMortFragment extends Fragment {
 
     private DatabaseAccess db;
     private EditText editTextNumNat;
     private Button buttonSubmit;
     private Button buttonEffacer;
+    private Button buttonNotifMort;
+    private FragmentFormulaireMortBinding binding;
 
     public static FormulaireMortFragment newInstance() {
         FormulaireMortFragment fragment = new FormulaireMortFragment();
@@ -29,8 +37,13 @@ public class FormulaireMortFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_formulaire_mort, container, false);
+        binding = FragmentFormulaireMortBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Acces à la BDD
         db = new DatabaseAccess(requireContext());
@@ -38,17 +51,17 @@ public class FormulaireMortFragment extends Fragment {
         // Récupérer les références des editText/Boutton du formulaire
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
         buttonEffacer = view.findViewById(R.id.buttonEffacer);
-        editTextNumNat = view.findViewById(R.id.editTextNumNat);
+        buttonNotifMort = view.findViewById(R.id.buttonNotifMort);
+        editTextNumNat = view.findViewById(R.id.editTextNumTra);
 
         // Bouton soumettre
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Afficher le popup de confirmation de suppression
-                popupConfirmationSuppression();
+                popupConfirmationNotificationMort();
             }
         });
-
 
         // Bouton effacer
         buttonEffacer.setOnClickListener(new View.OnClickListener() {
@@ -59,31 +72,44 @@ public class FormulaireMortFragment extends Fragment {
             }
         });
 
-        return view;
+        // Bouton notification de mort
+        binding.buttonNotifMort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer une instance de VisualisationAnimauxMortsFragment
+                VisualisationAnimauxMortsFragment visualisationAnimauxMortsFragment = VisualisationAnimauxMortsFragment.newInstance();
+
+                // Remplacer le fragment actuel par le fragment VisualisationAnimauxMortsFragment
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, visualisationAnimauxMortsFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
 
-    // Méthode pour supprimer les données de l'animal mort dans la base de données
-    private void suppressionanimal(){
-        // Récupération de la valeur numNat de l'EditText du formulaire
-        String numNat = editTextNumNat.getText().toString();
 
-        //Suppression de l'animal de la base de données
-        db.deleteAnimal(numNat);
 
-    }
-
-    // Popup pour la confirmation de suppression de l'animal
-    private void popupConfirmationSuppression() {
+    // Popup pour la confirmation de notification de mort de l'animal
+    private void popupConfirmationNotificationMort() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Confirmer la déclaration de mort");
-        builder.setMessage("Êtes-vous sûr de vouloir déclarer cet animal comme mort ?");
+        builder.setTitle("Confirmer la notification de mort");
+        builder.setMessage("Êtes-vous sûr de vouloir notifier cet animal comme mort ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                suppressionanimal();
+                // Créer un objet Animal avec les informations pertinentes
+                //Animal animal = new Animal();
+                //animal.setNumTra(editTextNumNat.getText().toString()); // Utilisez le numéro de travail ici
+
+                // Passer l'objet Animal à VisualisationAnimauxMortsFragment
+                //Bundle bundle = new Bundle();
+                //bundle.putSerializable("animal_mort", animal);
+
             }
         });
+
         builder.setNegativeButton("Non", null);
         AlertDialog dialog = builder.create();
         dialog.show();
