@@ -34,37 +34,38 @@ public class VisualisationElevageFragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_visualisation_elevage, container, false);
-        //View animalView = inflater.inflate(R.layout.fragment_details_animal, container, false);
-        TextView textViewNomElevage = rootView.findViewById(R.id.text_view_nom_elevage);
-
-        Elevage elevage = new Elevage();
-
-        layout = rootView.findViewById(R.id.animals_container);
-        binding = FragmentVisualisationElevageBinding.inflate(inflater, container, false);
-
-        // Set up the search view
-        binding.searchView.setQueryHint("Rechercher un numéro de travail...");
-
-        // Récupérer le nom de l'élevage depuis la classe Elevage
-
-        String nomElevage = elevage.getNom_elevage();
-        textViewNomElevage.setText("Elevage " + nomElevage); // Remplacez "nomElevage" par le nom récupéré de votre base de données
-
-
-        // Initialiser la base de données
-        db = new DatabaseAccess(requireContext());
-
-        // Récupérer le numéro de l'élevage
-        String numElevage = "990402";
-
-        // Récupérer tous les animaux de l'élevage
-        allAnimals = db.getAnimalsByElevage(numElevage);
-        textViewAttestation = rootView.findViewById(R.id.text_view_attestation);
-
+        View rootView = inflater.inflate(R.layout.fragment_visualisation_elevage, container, false); // Initialiser la vue
+        TextView textViewNomElevage = rootView.findViewById(R.id.text_view_nom_elevage); // Récupérer le textView pour afficher le nom de l'élevage
+        textViewAttestation = rootView.findViewById(R.id.text_view_attestation); // Récupérer le textView pour afficher l'attestation sanitaire
+        layout = rootView.findViewById(R.id.animals_container); // Récupérer le layout pour afficher les animaux
+        binding = FragmentVisualisationElevageBinding.inflate(inflater, container, false); // Initialiser la liaison de données
 
         // Initialiser la barre de recherche
         SearchView searchView = rootView.findViewById(R.id.searchView);
+        binding.searchView.setQueryHint("Rechercher un numéro de travail...");
+
+        db = new DatabaseAccess(requireContext()); // Initialiser la base de données
+
+
+
+        // Récupérer le numéro de l'élevage depuis la variable statique
+        String numElevage = MainActivity.numeroElevage;
+
+        // Récupérer les informations sur l'élevage depuis la base de données
+        Elevage elevage = db.getElevageByNumero(numElevage);
+
+        // Vérifier si l'élevage a été trouvé dans la base de données
+        if (elevage != null) {
+            // Utiliser le nom de l'élevage récupéré pour définir le texte du textViewNomElevage
+            textViewNomElevage.setText(elevage.getNom_elevage());
+        } else {
+            // Gérer le cas où l'élevage n'a pas été trouvé dans la base de données
+            textViewNomElevage.setText("Elevage n°" + numElevage);
+        }
+
+        // Récupérer tous les animaux de l'élevage
+        allAnimals = db.getAnimalsByElevage(numElevage);
+
 
         // Mettre en place un écouteur pour le texte saisi dans la barre de recherche
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -118,7 +119,7 @@ public class VisualisationElevageFragment extends Fragment {
                     textViewAttestation.setBackgroundResource(R.color.black);
                     attestationText = "ATTESTATION SANITAIRE : Non communiquée";
             }
-
+            MainActivity.asda = attestationText;
             textViewAttestation.setText(attestationText);
 
 
