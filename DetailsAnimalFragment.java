@@ -191,81 +191,91 @@ public class DetailsAnimalFragment extends Fragment {
         String codPaysMere = selectedAnimal.getCodPaysMere() != null ? selectedAnimal.getCodPaysMere() : "non connu";
         String codRaceMere = selectedAnimal.getCodRaceMere() != null ? selectedAnimal.getCodRaceMere() : "non connue";
 
+        // Définir la taille de la police pour les titres et le texte
+        paint.setTextSize(14); // Taille de police pour les titres
+        float lineHeight = 18; // Hauteur de ligne pour les sauts de ligne
+        float textSize = 12; // Taille de police pour le texte
+        String attestation = MainActivity.asda;
 
         // Dessiner toutes les informations de l'animal sur le canevas
         // Première section rose
         paint.setColor(ContextCompat.getColor(requireContext(), R.color.rose_pale)); // Rose
-        canvas.drawRect(0, y - 20, canvas.getWidth(), y + 250, paint);
+        canvas.drawRect(0, y - 15, canvas.getWidth(), y + 230, paint); // Ajuster la taille de la section
 
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Mettre en gras
-        paint.setTextSize(24);
         paint.setColor(Color.BLACK); // Changer la couleur du texte en noir
-        y += 25; // Espacement entre le haut de la page et le titre de la section rose
+        y += lineHeight; // Espacement entre le haut de la page et le titre de la section rose
 
         canvas.drawText("Informations générales", x, y, paint); // Ajouter un titre à la section rose
 
         paint.setTypeface(Typeface.DEFAULT); // Réinitialiser la police à la police par défaut
-        paint.setTextSize(18); // Taille de police régulière pour le contenu
-        paint.setColor(Color.BLACK); // Changer la couleur du texte en noir
+        paint.setTextSize(textSize); // Taille de police régulière pour le contenu
 
-        y += 35; // Espacement entre le titre et le contenu
+        y += lineHeight; // Espacement entre le titre et le contenu
 
         canvas.drawText("Numéro de travail: " + numTra, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Numéro national: " + numNat, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Nom de l'animal: " + nom, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race: " + race, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Date de naissance: " + dateNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays de naissance: " + codPaysNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Numéro d'exploitation de naissance: " + expNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Sexe: " + sexe, x, y, paint);
-        y += 25;
-
-
+        y += lineHeight;
 
         // Zone blanche entre les deux sections
         paint.setColor(Color.WHITE); // Couleur de fond blanc
         canvas.drawRect(0, y, canvas.getWidth(), y + 50, paint);
 
-
         // Deuxième section bleue
-        paint.setColor(ContextCompat.getColor(requireContext(), R.color.blue)); // Bleu clair pour le fond de la section
-        canvas.drawRect(0, y, canvas.getWidth(), y + 225, paint);
-        y += 25; // Espacement entre la zone blanche et le titre de la section bleue
+        paint.setColor(ContextCompat.getColor(requireContext(), R.color.blue)); // Bleu
 
-        // Titre de la deuxième section en gras
+        canvas.drawRect(0, y, canvas.getWidth(), y + 225, paint);
+        y += lineHeight; // Espacement entre la zone blanche et le titre de la section bleue
+
+// Titre de la deuxième section en gras
         paint.setColor(Color.BLACK); // Couleur de texte noire pour le titre
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Mettre en gras
-        paint.setTextSize(24);
         canvas.drawText("Génétique", x, y, paint); // Ajouter un titre à la section bleue
 
-
-        // Réinitialiser la police pour le contenu
+// Réinitialiser la police pour le contenu
         paint.setTypeface(Typeface.DEFAULT); // Réinitialiser la police à la police par défaut
-        paint.setTextSize(18); // Taille de police régulière pour le contenu
+        paint.setTextSize(textSize); // Taille de police régulière pour le contenu
 
-        y += 35; // Espacement entre le titre et le contenu
+        y += lineHeight; // Espacement entre le titre et le contenu
         paint.setColor(Color.BLACK);
         canvas.drawText("Numéro national du père: " + numNatPere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays du père: " + codPaysPere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race du père: " + codRacePere, x, y, paint);
-        y += 45;
+        y += lineHeight * 2; // Espacement plus grand après la race du père
         canvas.drawText("Numéro national de la mère: " + numNatMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays de la mère: " + codPaysMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race de la mère: " + codRaceMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
 
 
+        // Ajouter une nouvelle section pour l'attestation sanitaire
+        paint.setColor(Color.WHITE); // Fond blanc
+        canvas.drawRect(0, y, canvas.getWidth(), y + 100, paint); // Dessiner un rectangle blanc
+
+        paint.setColor(Color.BLACK); // Texte noir
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Texte en gras
+        paint.setTextSize(14); // Taille de police pour le titre de la section
+        y += lineHeight; // Espacement entre la section précédente et le titre
+
+
+        canvas.drawText(attestation, x, y, paint); // Ajouter un titre pour l'attestation sanitaire
 
 
         // Récupérer toutes les informations de l'animal
