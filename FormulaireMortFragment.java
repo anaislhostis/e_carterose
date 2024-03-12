@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.example.e_carterose.databinding.FragmentFormulaireMortBinding;
 
@@ -22,10 +23,10 @@ import com.example.e_carterose.databinding.FragmentFormulaireMortBinding;
 public class FormulaireMortFragment extends Fragment {
 
     private DatabaseAccess db;
-    private EditText editTextNumNat;
+    private EditText editTextNumTra;
     private Button buttonSubmit;
     private Button buttonEffacer;
-    private Button buttonNotifMort;
+    private Button buttonVoirNotifMort;
     private FragmentFormulaireMortBinding binding;
 
     public static FormulaireMortFragment newInstance() {
@@ -51,8 +52,8 @@ public class FormulaireMortFragment extends Fragment {
         // Récupérer les références des editText/Boutton du formulaire
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
         buttonEffacer = view.findViewById(R.id.buttonEffacer);
-        buttonNotifMort = view.findViewById(R.id.buttonNotifMort);
-        editTextNumNat = view.findViewById(R.id.editTextNumTra);
+        buttonVoirNotifMort = view.findViewById(R.id.buttonVoirNotifMort);
+        editTextNumTra = view.findViewById(R.id.editTextNumTra);
 
         // Bouton soumettre
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,9 @@ public class FormulaireMortFragment extends Fragment {
             public void onClick(View v) {
                 // Afficher le popup de confirmation de suppression
                 popupConfirmationNotificationMort();
+
+                // Réinitialiser le texte de l'EditText
+                editTextNumTra.setText("");
             }
         });
 
@@ -68,12 +72,12 @@ public class FormulaireMortFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Réinitialiser le texte de l'EditText
-                editTextNumNat.setText("");
+                editTextNumTra.setText("");
             }
         });
 
         // Bouton notification de mort
-        binding.buttonNotifMort.setOnClickListener(new View.OnClickListener() {
+        binding.buttonVoirNotifMort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Créer une instance de VisualisationAnimauxMortsFragment
@@ -93,20 +97,22 @@ public class FormulaireMortFragment extends Fragment {
 
     // Popup pour la confirmation de notification de mort de l'animal
     private void popupConfirmationNotificationMort() {
+        // Récupération du numéro de travail entré dans le formulaire
+        String numTra = editTextNumTra.getText().toString();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmer la notification de mort");
-        builder.setMessage("Êtes-vous sûr de vouloir notifier cet animal comme mort ?");
+        builder.setMessage(String.format("Êtes-vous sûr de vouloir notifier l'animal %s comme mort ?", numTra));
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Créer un objet Animal avec les informations pertinentes
-                //Animal animal = new Animal();
-                //animal.setNumTra(editTextNumNat.getText().toString()); // Utilisez le numéro de travail ici
 
-                // Passer l'objet Animal à VisualisationAnimauxMortsFragment
-                //Bundle bundle = new Bundle();
-                //bundle.putSerializable("animal_mort", animal);
+                // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
+                MainActivity mainActivity = (MainActivity) requireActivity();
+                mainActivity.ajouterAnimalMort(numTra);
 
+                // Afficher un message de confirmation
+                Toast.makeText(requireContext(), "L'animal avec le numéro de travail " + numTra + " a été notifié comme mort.", Toast.LENGTH_SHORT).show();
             }
         });
 
