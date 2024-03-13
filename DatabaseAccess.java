@@ -34,7 +34,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return instance;
     }
 
-    ;
+
 
     public void open() {
         // Ouvrir la base de données pour la manipulation des données
@@ -64,7 +64,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         Cursor cursor = null;
         try {
             db = openHelper.getReadableDatabase();
-            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON substr(animal.num_nat, 1, 6) = elevage.num_elevage WHERE elevage.num_elevage = ?";
+            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ?";
             cursor = db.rawQuery(query, new String[]{numElevage});
 
             open(); // Ouvrir la connexion vers la base de données
