@@ -1,6 +1,7 @@
 package com.example.e_carterose;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import android.app.DatePickerDialog;
 import java.util.Date;
@@ -25,12 +27,12 @@ import java.text.ParseException;
 public class FormulaireNaissanceFragment extends Fragment {
 
     private DatabaseAccess db;
+    private List<Animal> allAnimals; // Variable pour stocker la liste complète des animaux
     private Spinner spinnerSexe;
     private EditText editTextNom;
-    private EditText editTextNumTra;
+    private EditText editTextNumNat;
     private EditText editTextCodeRace;
     private Button buttonPickDateNais;
-    private SimpleDateFormat dateFormatter;
     private DatePickerDialog datePickerDialog;
     private Calendar calendar;
     private EditText editTextCodeRacePere;
@@ -57,12 +59,18 @@ public class FormulaireNaissanceFragment extends Fragment {
         // Acces à la BDD
         db = new DatabaseAccess(requireContext());
 
+        // Récupérer le numéro de l'élevage depuis la variable statique
+        String numElevage = MainActivity.numeroElevage;
+
+        // Récupérer tous les animaux de l'élevage
+        allAnimals = db.getAnimalsByElevage(numElevage);
+
         // Récupérer les références des editText/Spinner/Boutton du formulaire
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
         buttonEffacer = view.findViewById(R.id.buttonEffacer);
         buttonPickDateNais = view.findViewById(R.id.buttonPickDateNais);
         editTextNom = view.findViewById(R.id.editTextNom);
-        editTextNumTra = view.findViewById(R.id.editTextNumTra);
+        editTextNumNat = view.findViewById(R.id.editTextNumNat);
         editTextCodeRace = view.findViewById(R.id.editTextCodeRace);
         editTextCodeRacePere = view.findViewById(R.id.editTextCodeRacePere);
         editTextNumNatPere = view.findViewById(R.id.editTextNumNatPere);
@@ -119,12 +127,24 @@ public class FormulaireNaissanceFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Récupérer le numéro de travail entré
+                String numNat = editTextNumNat.getText().toString();
+                String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
+
+                // Vérifier si le numéro de travail existe déjà dans l'élevage
+                if (numTraExists(numTra)) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le numéro de travail " + numTra + " est déjà utilisé.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+
                 //Appeler la fonction de sauvgarde des données dans la bdd (insertion d'une nouvelle ligne)
                 sauvegarderDonneesFormulaire();
 
                 // Réinitialiser le texte de tous les EditText
                 editTextNom.setText("");
-                editTextNumTra.setText("");
+                editTextNumNat.setText("");
                 editTextCodeRace.setText("");
                 buttonPickDateNais.setText("Choisir une date");
                 editTextCodePaysPere.setText("");
@@ -149,7 +169,7 @@ public class FormulaireNaissanceFragment extends Fragment {
             public void onClick(View v) {
                 // Réinitialiser le texte de tous les EditText
                 editTextNom.setText("");
-                editTextNumTra.setText("");
+                editTextNumNat.setText("");
                 editTextCodeRace.setText("");
                 buttonPickDateNais.setText("Choisir une date");
                 editTextCodePaysPere.setText("");
@@ -183,9 +203,10 @@ public class FormulaireNaissanceFragment extends Fragment {
 
     // Méthode pour récupérer les données du formulaire et les sauvegarder
     private void sauvegarderDonneesFormulaire() {
+
         // Récupération des valeurs des EditText et Sinner du formulaire
         String nom = editTextNom.getText().toString();
-        String numTra = editTextNumTra.getText().toString();
+        String numNat = editTextNumNat.getText().toString();
         String codeRace = editTextCodeRace.getText().toString();
         String sexe = spinnerSexe.getSelectedItem().toString();
         String dateNais = buttonPickDateNais.getText().toString();
@@ -195,11 +216,9 @@ public class FormulaireNaissanceFragment extends Fragment {
         String numNatMere = editTextNumNatMere.getText().toString();
         String codeRaceMere= editTextCodeRaceMere.getText().toString();
         String codePaysMere = editTextCodePaysMere.getText().toString();
-        //String numElevage = elevage.getNum_elevage();// Récupération du numéro d'élevage
-        //String numNat = numElevage + numTra;
-        String numElevage = "NULL";
-        String numExpNais = "NULL";
-        String numNat = "NULL";
+        String numElevage = MainActivity.numeroElevage;
+        String numExpNais = MainActivity.numeroElevage;
+        String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
         String codePays = "FR"; //Code pays de l'exploitation
         String codePaysNais = "FR"; //Code pays de l'exploitation (lieu de naissance)
 
@@ -231,6 +250,26 @@ public class FormulaireNaissanceFragment extends Fragment {
             if (numNatPere.isEmpty()){
                 numNatPere = "NULL";
             }
+            // Mise en pplace de log.e pour voir si on insert les bonnes données
+            Log.e("numElevage :", numElevage);
+            Log.e("nom :", nom);
+            Log.e("sexe :", sexe);
+            Log.e("dateNaiss", dateNais);
+            Log.e("numTra :", numTra);
+            Log.e("numNat :", numNat);
+            Log.e("numNatPere :", numNatPere);
+            Log.e("codeRacePere :", codeRacePere);
+            Log.e("codePaysPere :", codePaysPere);
+            Log.e("numNatMere :", numNatMere);
+            Log.e("codeRaceMere :", codeRaceMere);
+            Log.e("codePaysMere :", codePaysMere);
+            Log.e("numExpNais :", numExpNais);
+            Log.e("codePays :", codePays);
+            Log.e("codeRace :", codeRace);
+            Log.e("codePaysNais :", codePaysNais);
+
+
+
 
             // Ajouter ces données à la base de données
             long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace);
@@ -247,5 +286,20 @@ public class FormulaireNaissanceFragment extends Fragment {
             // Afficher un message d'erreur indiquant les champs obligatoires manquants
             Toast.makeText(requireContext(), "Veuillez remplir tous les champs obligatoires.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Fonction pour vérifier si un animal avec le numéro de travail donné existe déjà dans l'élevage
+    private boolean numTraExists(String numTra) {
+        // Parcourir la liste de tous les animaux de l'élevage
+        for (Animal animal : allAnimals) {
+
+            // Vérifier si le numéro de travail de l'animal entré correspond a un numéro de travail
+            if (animal.getNumTra().equals(numTra)) {
+                // Retourner vrai si l'animal existe
+                return true;
+            }
+        }
+        // Retourner faux si l'animal n'existe pas
+        return false;
     }
 }
