@@ -374,6 +374,48 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return nomElevage;
     }
 
+    // Méthode pour récupérer les informationsde l'animal par le numTra
+    @SuppressLint("Range")
+    public Animal getAnimalByNumTra(String numTra) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        Animal animal = null;
+        try {
+            db = openHelper.getReadableDatabase();
+            String query = "SELECT * FROM animal WHERE num_tra = ?";
+            cursor = db.rawQuery(query, new String[]{numTra});
+            if (cursor.moveToFirst()) {
+                // Créer une nouvelle instance de Animal avec les données récupérées
+                animal = new Animal();
+                animal.setNumNat(cursor.getString(cursor.getColumnIndex("num_nat")));
+                animal.setNom(cursor.getString(cursor.getColumnIndex("nom")));
+                animal.setCodPays(cursor.getString(cursor.getColumnIndex("cod_pays")));
+                animal.setSexe(cursor.getString(cursor.getColumnIndex("sexe")));
+                animal.setDateNaiss(cursor.getString(cursor.getColumnIndex("date_naiss")));
+                animal.setCodPaysNaiss(cursor.getString(cursor.getColumnIndex("cod_pays_naiss")));
+                animal.setNumExpNaiss(cursor.getString(cursor.getColumnIndex("num_exp_naiss")));
+                animal.setCodPaysPere(cursor.getString(cursor.getColumnIndex("cod_pays_pere")));
+                animal.setNumNatPere(cursor.getString(cursor.getColumnIndex("num_nat_pere")));
+                animal.setCodRacePere(cursor.getString(cursor.getColumnIndex("cod_race_pere")));
+                animal.setCodPaysMere(cursor.getString(cursor.getColumnIndex("cod_pays_mere")));
+                animal.setNumNatMere(cursor.getString(cursor.getColumnIndex("num_nat_mere")));
+                animal.setCodRaceMere(cursor.getString(cursor.getColumnIndex("cod_race_mere")));
+                animal.setNumElevage(cursor.getString(cursor.getColumnIndex("num_elevage")));
+                animal.setRace(cursor.getString(cursor.getColumnIndex("cod_race")));
+                animal.setNumTra(numTra);
+            }
+        } catch (SQLException e) {
+            Log.e("DatabaseAccess", "Error retrieving animal by numTra from database", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                close();
+            }
+        }
+        return animal;
+    }
 
     public long insertAnimal(String numNat, String numTra, String codePays, String nom, String sexe, String dateNais, String codePaysNais, String numExpNais,  String codePaysPere, String numNatPere, String codeRacePere, String codePaysMere, String numNatMere, String codeRaceMere, String numElevage, String codeRace) {
         open(); // Ouvrir la connexion vers la base de données
@@ -401,10 +443,8 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return newRowId;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////Suppression données de la table animal///////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
+    //Suppression données de la table animal
     public void deleteAnimal(String numNat) {
         open(); // Ouvrir la connexion vers la base de données
         db.delete("animal", "num_nat = ?", new String[]{numNat});
