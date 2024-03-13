@@ -25,26 +25,26 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
-    <!-- Numéro de travail -->
+    <!-- Numéro de national -->
     <TextView
-        android:id="@+id/textViewNumTra"
+        android:id="@+id/textViewNumNat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text="Numéro de travail :"
+        android:text="Numéro national :"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editTextNumTra"
+        android:id="@+id/editTextNumNat"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/border_shape"
-        android:hint="  ex : 2308"
-        android:maxLength="4"
+        android:hint="  ex : 9904022308"
+        android:maxLength="10"
         android:inputType="number" />
 
     <!-- Nom du veau -->
@@ -128,7 +128,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:hint="Choisir une date"
-        android:background="@drawable/border_shape"
+        android:background="@drawable/border_formulaire_date"
         style="@style/ButtonDateFormulaire"/>
 
 
@@ -265,29 +265,38 @@
         android:maxLength="2"
         android:background="@drawable/border_shape"/>
 
-    <!-- Bouton soumettre -->
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="center_horizontal"
-        style = "@style/ButtonEleveur"
-        android:text="Soumettre" />
+        <!-- Layout horizontal pour les boutons Soumettre et Effacer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
-    <!-- Bouton effacer -->
-    <Button
-        android:id="@+id/buttonEffacer"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="center_horizontal"
-        style="@style/ButtonEffacerFormulaire"
-        android:text="Effacer" />
+            <!-- Bouton soumettre -->
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="40dp"
+                style="@style/ButtonEleveur"
+                android:text="Soumettre" />
+
+            <!-- Bouton effacer -->
+            <Button
+                android:id="@+id/buttonEffacer"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="40dp"
+                style="@style/ButtonEffacerFormulaire"
+                android:text="Effacer" />
+
+        </LinearLayout>
 
 </LinearLayout>
 </ScrollView>
