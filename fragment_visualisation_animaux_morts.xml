@@ -1,0 +1,48 @@
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_visualisation_animaux_morts"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".FormulaireNaissanceFragment">
+
+        <!-- Titre de la page -->
+        <TextView
+            android:id="@+id/TitreFormNais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="Visualisation des animaux morts"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="16dp"
+            android:text="Animaux notifiés morts :  "
+            android:textSize="16dp"/>
+
+        <LinearLayout
+            android:id="@+id/dead_animals_container"
+            style = "@style/AnimalContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
