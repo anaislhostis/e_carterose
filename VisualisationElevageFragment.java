@@ -51,7 +51,7 @@ public class VisualisationElevageFragment extends Fragment {
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
 
-        // Récupérer les informations sur l'élevage depuis la base de données
+        // Récupérer les informations des animaux actifs sur l'élevage depuis la base de données
         Elevage elevage = db.getElevageByNumero(numElevage);
 
         // Vérifier si l'élevage a été trouvé dans la base de données
@@ -64,7 +64,7 @@ public class VisualisationElevageFragment extends Fragment {
         }
 
         // Récupérer tous les animaux de l'élevage
-        allAnimals = db.getAnimalsByElevage(numElevage);
+        allAnimals = db.getActiveAnimalsByElevage(numElevage);
 
 
         // Mettre en place un écouteur pour le texte saisi dans la barre de recherche
