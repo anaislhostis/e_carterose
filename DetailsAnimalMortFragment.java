@@ -13,12 +13,16 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -32,12 +36,15 @@ import java.io.IOException;
 public class DetailsAnimalMortFragment extends Fragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private Animal selectedAnimal;
+    private DatabaseAccess db;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_details_animal_mort, container, false);
+
+        db = new DatabaseAccess(requireContext()); // Initialisez la base de données
 
         // Retrieve animal data from arguments
         Bundle bundle = getArguments();
@@ -126,11 +133,23 @@ public class DetailsAnimalMortFragment extends Fragment {
         });
 
 
+        // Bouton de génération du PDF de la carte rose
         Button buttonGeneratePDF = rootView.findViewById(R.id.buttonTelecharger);
         buttonGeneratePDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 generatePDF();
+            }
+        });
+
+
+        // Bouton récupération de l'animal par l'équarisseur
+        Button buttonRecupEquarisseur = rootView.findViewById(R.id.buttonRecupEquarisseur);
+        buttonRecupEquarisseur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String numNat = selectedAnimal.getNumNat();
+                popupConfirmationRecoveryDeadAnimal(numNat);
             }
         });
 
@@ -306,5 +325,28 @@ public class DetailsAnimalMortFragment extends Fragment {
         document.close();
     }
 
+    private void popupConfirmationRecoveryDeadAnimal(String numNat) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirmation de récupération de l'animal");
+        builder.setMessage(String.format("L'animal %s a-t-il été récupéré par l'équarrisseur ?", selectedAnimal.getNumTra()));
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(requireContext(), "L'animal a été récupéré par l'équarrisseur.", Toast.LENGTH_SHORT).show();
+
+                //Appeler la fonction qui supprime l'animal de la base de données
+                db.deleteAnimal(numNat);
+                Log.e("numNat :", numNat);
+            }
+        });
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(requireContext(), "L'animal n'a pas été récupéré par l'équarrisseur.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }
