@@ -172,6 +172,18 @@
                 android:gravity="center"
                 android:text="Télécharger la carte rose" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/buttonRecupEquarisseur"
+                style="@style/ButtonAnimalDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Animal récupéré par l'équarisseur ?" />
+
 
         </LinearLayout>
 
