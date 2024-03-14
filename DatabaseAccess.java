@@ -56,6 +56,71 @@ public class DatabaseAccess extends DatabaseOpenHelper {
     //////////////////////////////Requêtes vers la BDD//////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    List<Animal> activeAnimals = new ArrayList<>();
+
+    // Récupération des animaux viviant (actif=1) de l'élevage
+    @SuppressLint("Range")
+    public List<Animal> getActiveAnimalsByElevage(String numElevage) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = openHelper.getReadableDatabase();
+            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ? AND animal.actif = 1";
+            cursor = db.rawQuery(query, new String[]{numElevage});
+
+            open(); // Ouvrir la connexion vers la base de données
+
+            while (cursor.moveToNext()) {
+                Animal animalObj = new Animal();
+
+                String num_nat = cursor.getString(cursor.getColumnIndex("num_nat"));
+                animalObj.setNumNat(cursor.getString(cursor.getColumnIndex("num_nat")));
+
+                String nom = getNomByNumNat(num_nat);
+                animalObj.setNom(nom);
+
+                animalObj.setNumTra(cursor.getString(cursor.getColumnIndex("num_tra")));
+                animalObj.setCodPays(cursor.getString(cursor.getColumnIndex("cod_pays")));
+                animalObj.setSexe(cursor.getString(cursor.getColumnIndex("sexe")));
+                animalObj.setDateNaiss(cursor.getString(cursor.getColumnIndex("date_naiss")));
+                animalObj.setCodPaysNaiss(cursor.getString(cursor.getColumnIndex("cod_pays_naiss")));
+                animalObj.setNumExpNaiss(cursor.getString(cursor.getColumnIndex("num_exp_naiss")));
+                animalObj.setCodPaysPere(cursor.getString(cursor.getColumnIndex("cod_pays_pere")));
+                animalObj.setNumNatPere(cursor.getString(cursor.getColumnIndex("num_nat_pere")));
+
+                String raceCodePere = cursor.getString(cursor.getColumnIndex("cod_race_pere"));
+                String raceLabelPere = getRaceLabelByCode(raceCodePere);
+                animalObj.setCodRacePere(raceLabelPere);
+
+                animalObj.setCodPaysMere(cursor.getString(cursor.getColumnIndex("cod_pays_mere")));
+                animalObj.setNumNatMere(cursor.getString(cursor.getColumnIndex("num_nat_mere")));
+
+                String raceCodeMere = cursor.getString(cursor.getColumnIndex("cod_race_mere"));
+                String raceLabelMere = getRaceLabelByCode(raceCodeMere);
+                animalObj.setCodRaceMere(raceLabelMere);
+
+                animalObj.setNumElevage(cursor.getString(cursor.getColumnIndex("num_elevage")));
+
+                String raceCode = cursor.getString(cursor.getColumnIndex("cod_race"));
+                String raceLabel = getRaceLabelByCode(raceCode);
+                animalObj.setRace(raceLabel);
+
+
+                activeAnimals.add(animalObj);
+            }
+        } catch (SQLException e) {
+            Log.e("DatabaseAccess", "Error retrieving data from database", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                close(); // Fermer la connexion vers la base de données dans tous les cas
+            }
+        }
+        return activeAnimals;
+    }
+
     List<Animal> animals = new ArrayList<>();
 
     // Récupération des animaux viviant (actif=1) de l'élevage
@@ -65,7 +130,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         Cursor cursor = null;
         try {
             db = openHelper.getReadableDatabase();
-            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ? AND animal.actif = 1";
+            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ?";
             cursor = db.rawQuery(query, new String[]{numElevage});
 
             open(); // Ouvrir la connexion vers la base de données
@@ -120,6 +185,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         }
         return animals;
     }
+
 
 
     @SuppressLint("Range")
