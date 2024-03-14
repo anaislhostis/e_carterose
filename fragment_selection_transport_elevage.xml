@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TextView_elevage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/ligth_beige"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SelectionEndroitTransfertFragment">
+
+
+    <!-- Titre de la page -->
+    <TextView
+        android:id="@+id/TitreEndroitTransfert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="Transférer un animal dans un nouvel élevage"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+
+        <!-- Numéro d'élevage -->
+    <TextView
+        android:id="@+id/textViewNumNat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Entrez le numéro d'élevage de l'exploitation d'arrivé :"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/editTextNumNat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 75012345"
+        android:maxLength="8"
+        android:inputType="number" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+    <!-- Comment voulez-vous transférer votre animal ? -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Comment voulez-vous transférer votre animal ?"
+        android:textSize="14sp" />
+
+    <!-- Boutons -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Bouton Eleveur -->
+        <Button
+            android:id="@+id/BoutonTransfertDirect"
+            style="@style/ButtonEleveur"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:text="Transfert direct" />
+
+        <!-- Bouton Controleur -->
+        <Button
+            android:id="@+id/BoutonTransfertIndirect"
+            style="@style/ButtonEleveur"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:text="Transfert indirect" />
+
+    </LinearLayout>
+
+    <!-- *Transfert indirect -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#808080"
+        android:text="*Transfert indirect = tranfert avec transporteur"
+        android:textSize="12sp" />
+</LinearLayout>
