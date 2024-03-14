@@ -402,6 +402,8 @@ public class DatabaseAccess extends DatabaseOpenHelper {
                 animal.setCodRaceMere(cursor.getString(cursor.getColumnIndex("cod_race_mere")));
                 animal.setNumElevage(cursor.getString(cursor.getColumnIndex("num_elevage")));
                 animal.setRace(cursor.getString(cursor.getColumnIndex("cod_race")));
+                animal.setDateModif(cursor.getString(cursor.getColumnIndex("date_modif")));
+                animal.setActif(cursor.getString(cursor.getColumnIndex("actif")));
                 animal.setNumTra(numTra);
             }
         } catch (SQLException e) {
@@ -417,7 +419,9 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return animal;
     }
 
-    public long insertAnimal(String numNat, String numTra, String codePays, String nom, String sexe, String dateNais, String codePaysNais, String numExpNais,  String codePaysPere, String numNatPere, String codeRacePere, String codePaysMere, String numNatMere, String codeRaceMere, String numElevage, String codeRace) {
+
+    // Inserer un animal dans la table animal
+    public long insertAnimal(String numNat, String numTra, String codePays, String nom, String sexe, String dateNais, String codePaysNais, String numExpNais,  String codePaysPere, String numNatPere, String codeRacePere, String codePaysMere, String numNatMere, String codeRaceMere, String numElevage, String codeRace, String dateModif, String actif) {
         open(); // Ouvrir la connexion vers la base de données
         ContentValues values = new ContentValues(); //Classe pour stocker l'ensemble de valeurs
         values.put("cod_pays", codePays);
@@ -436,6 +440,8 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         values.put("cod_pays_mere", codePaysMere);
         values.put("num_tra", numTra);
         values.put("num_exp_naiss", numExpNais);
+        values.put("date_modif", dateModif);
+        values.put("actif", actif);
 
         // Insérer la ligne dans la table
         long newRowId = db.insert("animal", null, values);
