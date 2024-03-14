@@ -332,11 +332,16 @@ public class DetailsAnimalMortFragment extends Fragment {
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                //Appeler la fonction qui change le satut de l'animal (passe à 0 = non actif)
+                db.updateStatus(numNat);
+
                 Toast.makeText(requireContext(), "L'animal a été récupéré par l'équarrisseur.", Toast.LENGTH_SHORT).show();
 
-                //Appeler la fonction qui supprime l'animal de la base de données
-                db.deleteAnimal(numNat);
-                Log.e("numNat :", numNat);
+                // On enlève l'animal de la page visualisation des animaux notifiés morts
+                // Supprimer le numéro de travail de l'animal de la liste des animaux morts dans MainActivity
+                ((MainActivity) requireActivity()).delDeadAnimal(selectedAnimal.getNumTra());
+
             }
         });
         builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
