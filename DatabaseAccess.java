@@ -58,13 +58,14 @@ public class DatabaseAccess extends DatabaseOpenHelper {
 
     List<Animal> animals = new ArrayList<>();
 
+    // Récupération des animaux viviant (actif=1) de l'élevage
     @SuppressLint("Range")
     public List<Animal> getAnimalsByElevage(String numElevage) {
         SQLiteDatabase db = null;
         Cursor cursor = null;
         try {
             db = openHelper.getReadableDatabase();
-            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ?";
+            String query = "SELECT animal.*, elevage.* FROM animal INNER JOIN elevage ON animal.num_elevage = elevage.num_elevage WHERE elevage.num_elevage = ? AND animal.actif = 1";
             cursor = db.rawQuery(query, new String[]{numElevage});
 
             open(); // Ouvrir la connexion vers la base de données
@@ -374,6 +375,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return nomElevage;
     }
 
+
     // Méthode pour récupérer les informationsde l'animal par le numTra
     @SuppressLint("Range")
     public Animal getAnimalByNumTra(String numTra) {
@@ -449,15 +451,24 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return newRowId;
     }
 
-    
-    //Suppression données de la table animal
-    public void deleteAnimal(String numNat) {
-        open(); // Ouvrir la connexion vers la base de données
-        db.delete("animal", "num_nat = ?", new String[]{numNat});
-        close(); // Fermer la connexion à la base de données
+
+    // Modifier le statut de l'animal lorsqu'il est mort (le passe à 0)
+    public void updateStatus(String numNat) {
+        try {
+            open(); // Ouvrir la connexion vers la base de données
+
+            // Créer un ContentValues pour mettre à jour la colonne "actif" à 0
+            ContentValues values = new ContentValues();
+            values.put("actif", 0);
+
+            // Exécuter la mise à jour dans la table "animal" en fonction du numéro national
+            db.update("animal", values, "num_nat = ?", new String[]{numNat});
+
+        } catch (SQLException e) {
+            Log.e("DatabaseAccess", "Error updating actif status in database", e);
+        } finally {
+            close(); // Fermer la connexion à la base de données
+        }
     }
 
 }
-
-
-
