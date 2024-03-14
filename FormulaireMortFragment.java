@@ -132,7 +132,7 @@ public class FormulaireMortFragment extends Fragment {
                 if (animalExists(numTra)) {
                     // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
                     MainActivity mainActivity = (MainActivity) requireActivity();
-                    mainActivity.ajouterAnimalMort(numTra);
+                    mainActivity.addDeadAnimal(numTra);
 
                     Log.e("Liste des animaux morts :", ((MainActivity) requireActivity()).getNumTraAnimauxMorts().toString());
 
