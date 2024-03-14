@@ -128,19 +128,66 @@ public class FormulaireNaissanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // Récupérer le numéro de travail entré
+                // Vérifier si le numéro de travail entré existe déjà dans l'élevage
                 String numNat = editTextNumNat.getText().toString();
                 String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
-
-                // Vérifier si le numéro de travail existe déjà dans l'élevage
                 if (numTraExists(numTra)) {
                     // Afficher un message d'erreur
                     Toast.makeText(requireContext(), "Le numéro de travail " + numTra + " est déjà utilisé.", Toast.LENGTH_SHORT).show();
                     return; // Arrêter l'exécution de la méthode
                 }
 
+                // Vérifier que le nombre de chiffres entré dans les champs du formulaire correspond à la longueur maximale spécifiée dans le layout
+                if (numNat.length() != 10) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le numéro national doit contenir exactement " + 10 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String codeRace = editTextCodeRace.getText().toString();
+                if (codeRace.length() != 2) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le code race doit contenir exactement " + 2 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String numNatPere = editTextNumNatPere.getText().toString();
+                if (numNatPere.length() != 10) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le numéro national du père doit contenir exactement " + 10 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String codePaysPere = editTextCodePaysPere.getText().toString();
+                if (codePaysPere.length() != 2) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le code pays du père doit contenir exactement " + 2 + " lettres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String codeRacePere = editTextCodeRacePere.getText().toString();
+                if (codeRacePere.length() != 2) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le code race du père doit contenir exactement " + 2 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String numNatMere = editTextNumNatMere.getText().toString();
+                if (numNatMere.length() != 10) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le numéro national de la mère doit contenir exactement " + 10 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String codePaysMere = editTextCodePaysMere.getText().toString();
+                if (codePaysMere.length() != 2) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le code pays de la mère doit contenir exactement " + 2 + " lettres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+                String codeRaceMere= editTextCodeRaceMere.getText().toString();
+                if (codeRaceMere.length() != 2) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le code race doit contenir exactement " + 2 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
+
                 //Appeler la fonction de sauvgarde des données dans la bdd (insertion d'une nouvelle ligne)
-                sauvegarderDonneesFormulaire();
+                saveFormData();
 
                 // Réinitialiser le texte de tous les EditText
                 editTextNom.setText("");
@@ -202,7 +249,7 @@ public class FormulaireNaissanceFragment extends Fragment {
 
 
     // Méthode pour récupérer les données du formulaire et les sauvegarder
-    private void sauvegarderDonneesFormulaire() {
+    private void saveFormData() {
 
         // Récupération des valeurs des EditText et Sinner du formulaire
         String nom = editTextNom.getText().toString();
@@ -237,6 +284,7 @@ public class FormulaireNaissanceFragment extends Fragment {
             e.printStackTrace();
             System.out.println("Erreur lors de la conversion de la date.");
         }
+
 
         // Vérifier si les champs obligatoires sont remplis
         if (!numTra.isEmpty() && !codeRace.isEmpty() && !sexe.isEmpty() && !dateNais.isEmpty() && !codeRacePere.isEmpty() && !codeRaceMere.isEmpty() && !numNatMere.isEmpty() && !codePaysMere.isEmpty()) {
