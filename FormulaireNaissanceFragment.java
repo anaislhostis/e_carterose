@@ -268,6 +268,8 @@ public class FormulaireNaissanceFragment extends Fragment {
         String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
         String codePays = "FR"; //Code pays de l'exploitation
         String codePaysNais = "FR"; //Code pays de l'exploitation (lieu de naissance)
+        String dateModif = getCurrentDateTime();
+        String actif = "1";
 
         // Formater la date dans le bon format
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -315,12 +317,14 @@ public class FormulaireNaissanceFragment extends Fragment {
             Log.e("codePays :", codePays);
             Log.e("codeRace :", codeRace);
             Log.e("codePaysNais :", codePaysNais);
+            Log.e("dateModif", dateModif);
+            Log.e("actif", actif);
 
 
 
 
             // Ajouter ces données à la base de données
-            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace);
+            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace, dateModif, actif);
 
             // Vérifier si l'insertion a réussi
             if (newRowId > 0) {
@@ -349,5 +353,20 @@ public class FormulaireNaissanceFragment extends Fragment {
         }
         // Retourner faux si l'animal n'existe pas
         return false;
+    }
+
+    // Méthode pour obtenir la date actuelle au format spécifié
+    public String getCurrentDateTime() {
+        // Obtenir la date actuelle
+        Date currentDate = new Date();
+
+        // Définir le format de date souhaité
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+        // Formater la date actuelle selon le format spécifié
+        String formattedDate = dateFormat.format(currentDate);
+
+        // Retourner la date formattée
+        return formattedDate;
     }
 }
