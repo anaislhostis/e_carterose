@@ -130,7 +130,7 @@ public class FormulaireNaissanceFragment extends Fragment {
                 // Vérifier si le numéro de travail entré existe déjà dans l'élevage
                 String numNat = editTextNumNat.getText().toString();
                 String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
-                if (db.numTraExists(numTra, allAnimals)) {
+                if (db.isNumTraExists(numTra, allAnimals)) {
                     // Afficher un message d'erreur
                     Toast.makeText(requireContext(), "Le numéro de travail " + numTra + " est déjà utilisé.", Toast.LENGTH_SHORT).show();
                     return; // Arrêter l'exécution de la méthode
