@@ -62,8 +62,7 @@ public class FormulaireNaissanceFragment extends Fragment {
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
 
-        // Récupérer tous les animaux de l'élevage
-        allAnimals = db.getAnimalsByElevage(numElevage);
+
 
         // Récupérer les références des editText/Spinner/Boutton du formulaire
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
@@ -131,7 +130,7 @@ public class FormulaireNaissanceFragment extends Fragment {
                 // Vérifier si le numéro de travail entré existe déjà dans l'élevage
                 String numNat = editTextNumNat.getText().toString();
                 String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
-                if (numTraExists(numTra)) {
+                if (db.numTraExists(numTra, allAnimals)) {
                     // Afficher un message d'erreur
                     Toast.makeText(requireContext(), "Le numéro de travail " + numTra + " est déjà utilisé.", Toast.LENGTH_SHORT).show();
                     return; // Arrêter l'exécution de la méthode
@@ -268,7 +267,6 @@ public class FormulaireNaissanceFragment extends Fragment {
         String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
         String codePays = "FR"; //Code pays de l'exploitation
         String codePaysNais = "FR"; //Code pays de l'exploitation (lieu de naissance)
-        String dateModif = getCurrentDateTime();
         String actif = "1";
 
         // Formater la date dans le bon format
@@ -317,14 +315,13 @@ public class FormulaireNaissanceFragment extends Fragment {
             Log.e("codePays :", codePays);
             Log.e("codeRace :", codeRace);
             Log.e("codePaysNais :", codePaysNais);
-            Log.e("dateModif", dateModif);
             Log.e("actif", actif);
 
 
 
 
             // Ajouter ces données à la base de données
-            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace, dateModif, actif);
+            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace, actif);
 
             // Vérifier si l'insertion a réussi
             if (newRowId > 0) {
@@ -340,33 +337,7 @@ public class FormulaireNaissanceFragment extends Fragment {
         }
     }
 
-    // Fonction pour vérifier si un animal avec le numéro de travail donné existe déjà dans l'élevage
-    private boolean numTraExists(String numTra) {
-        // Parcourir la liste de tous les animaux de l'élevage
-        for (Animal animal : allAnimals) {
 
-            // Vérifier si le numéro de travail de l'animal entré correspond a un numéro de travail
-            if (animal.getNumTra().equals(numTra)) {
-                // Retourner vrai si l'animal existe
-                return true;
-            }
-        }
-        // Retourner faux si l'animal n'existe pas
-        return false;
-    }
 
-    // Méthode pour obtenir la date actuelle au format spécifié
-    public String getCurrentDateTime() {
-        // Obtenir la date actuelle
-        Date currentDate = new Date();
 
-        // Définir le format de date souhaité
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-
-        // Formater la date actuelle selon le format spécifié
-        String formattedDate = dateFormat.format(currentDate);
-
-        // Retourner la date formattée
-        return formattedDate;
-    }
 }
