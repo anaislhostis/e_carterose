@@ -129,10 +129,13 @@ public class FormulaireMortFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 // Vérifier si l'animal avec le numéro de travail donné existe déjà dans la base de données
-                if (animalExists(numTra)) {
+                if (db.numTraExists(numTra, allAnimals)) {
                     // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
                     MainActivity mainActivity = (MainActivity) requireActivity();
                     mainActivity.addDeadAnimal(numTra);
+
+                    // Modifier le statut de l'animal (actif = 2)
+                    db.updateStatusNotifiedDeadByEleveur(numTra);
 
                     Log.e("Liste des animaux morts :", ((MainActivity) requireActivity()).getNumTraAnimauxMorts().toString());
 
@@ -152,18 +155,4 @@ public class FormulaireMortFragment extends Fragment {
         dialog.show();
     }
 
-    // Fonction pour vérifier si un animal avec le numéro de travail donné existe dans l'élevage
-    private boolean animalExists(String numTra) {
-        // Parcourir la liste de tous les animaux de l'élevage
-        for (Animal animal : allAnimals) {
-
-            // Vérifier si le numéro de travail de l'animal correspond au numéro de travail donné
-            if (animal.getNumTra().equals(numTra)) {
-                // Retourner vrai si l'animal existe
-                return true;
-            }
-        }
-        // Retourner faux si l'animal n'existe pas
-        return false;
-    }
 }
