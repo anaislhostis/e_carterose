@@ -8,9 +8,12 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,6 +330,22 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         return exists;
     }
 
+    // Fonction pour vérifier si un animal avec le numéro de travail donné existe déjà dans l'élevage
+    public boolean numTraExists(String numTra, List<Animal> allAnimals) {
+
+        // Parcourir la liste de tous les animaux de l'élevage
+        for (Animal animal : allAnimals) {
+
+            // Vérifier si le numéro de travail de l'animal entré correspond a un numéro de travail
+            if (animal.getNumTra().equals(numTra)) {
+                // Retourner vrai si l'animal existe
+                return true;
+            }
+        }
+        // Retourner faux si l'animal n'existe pas
+        return false;
+    }
+
     @SuppressLint("Range")
     public long createElevageProfile(String numeroElevage, String nomElevage, String motDePasse) {
         SQLiteDatabase db = null;
@@ -343,6 +362,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
                 ContentValues values = new ContentValues();
                 values.put("nom", nomElevage);
                 values.put("mdp", motDePasse);
+                values.put("date_modif", getCurrentDateTime()); // Modifier la date de modification
 
                 result = db.update("elevage", values, "num_elevage = ?", new String[]{numeroElevage});
             } else {
@@ -351,6 +371,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
                 values.put("num_elevage", numeroElevage);
                 values.put("nom", nomElevage);
                 values.put("mdp", motDePasse);
+                values.put("date_modif", getCurrentDateTime()); // Modifier la date de modification
 
                 result = db.insert("elevage", null, values);
             }
@@ -489,7 +510,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
 
 
     // Inserer un animal dans la table animal
-    public long insertAnimal(String numNat, String numTra, String codePays, String nom, String sexe, String dateNais, String codePaysNais, String numExpNais,  String codePaysPere, String numNatPere, String codeRacePere, String codePaysMere, String numNatMere, String codeRaceMere, String numElevage, String codeRace, String dateModif, String actif) {
+    public long insertAnimal(String numNat, String numTra, String codePays, String nom, String sexe, String dateNais, String codePaysNais, String numExpNais,  String codePaysPere, String numNatPere, String codeRacePere, String codePaysMere, String numNatMere, String codeRaceMere, String numElevage, String codeRace, String actif) {
         open(); // Ouvrir la connexion vers la base de données
         ContentValues values = new ContentValues(); //Classe pour stocker l'ensemble de valeurs
         values.put("cod_pays", codePays);
@@ -508,7 +529,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
         values.put("cod_pays_mere", codePaysMere);
         values.put("num_tra", numTra);
         values.put("num_exp_naiss", numExpNais);
-        values.put("date_modif", dateModif);
+        values.put("date_modif", getCurrentDateTime());
         values.put("actif", actif);
 
         // Insérer la ligne dans la table
@@ -518,23 +539,60 @@ public class DatabaseAccess extends DatabaseOpenHelper {
     }
 
 
-    // Modifier le statut de l'animal lorsqu'il est mort (le passe à 0)
-    public void updateStatus(String numNat) {
+    // Modifier le statut de l'animal lorsqu'il est nofifé mort par l'éleveur (passe à 2)
+    public void updateStatusNotifiedDeadByEleveur(String numTra) {
         try {
             open(); // Ouvrir la connexion vers la base de données
 
-            // Créer un ContentValues pour mettre à jour la colonne "actif" à 0
+            // Créer un ContentValues pour mettre à jour la colonne "actif" à 2
             ContentValues values = new ContentValues();
-            values.put("actif", 0);
+            values.put("actif", 2);
+            values.put("date_modif", getCurrentDateTime()); // Modifier la date de modification
 
             // Exécuter la mise à jour dans la table "animal" en fonction du numéro national
-            db.update("animal", values, "num_nat = ?", new String[]{numNat});
+            db.update("animal", values, "num_tra = ?", new String[]{numTra});
 
         } catch (SQLException e) {
             Log.e("DatabaseAccess", "Error updating actif status in database", e);
         } finally {
             close(); // Fermer la connexion à la base de données
         }
+    }
+
+    // Modifier le statut de l'animal lorsqu'il est mort, récupéré par l'équarisseur (passe à 0)
+    public void updateStatusDead(String numTra) {
+        try {
+            open(); // Ouvrir la connexion vers la base de données
+
+            // Créer un ContentValues pour mettre à jour la colonne "actif" à 0
+            ContentValues values = new ContentValues();
+            values.put("actif", 0);
+            values.put("date_modif", getCurrentDateTime()); // Modifier la date de modification
+
+
+            // Exécuter la mise à jour dans la table "animal" en fonction du numéro de travail
+            db.update("animal", values, "num_tra = ?", new String[]{numTra});
+
+        } catch (SQLException e) {
+            Log.e("DatabaseAccess", "Error updating actif status in database", e);
+        } finally {
+            close(); // Fermer la connexion à la base de données
+        }
+    }
+
+    // Méthode pour obtenir la date actuelle au format spécifié
+    public String getCurrentDateTime() {
+        // Obtenir la date actuelle
+        Date currentDate = new Date();
+
+        // Définir le format de date souhaité
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+        // Formater la date actuelle selon le format spécifié
+        String formattedDate = dateFormat.format(currentDate);
+
+        // Retourner la date formattée
+        return formattedDate;
     }
 
 }
