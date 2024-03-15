@@ -331,7 +331,7 @@ public class DatabaseAccess extends DatabaseOpenHelper {
     }
 
     // Fonction pour vérifier si un animal avec le numéro de travail donné existe déjà dans l'élevage
-    public boolean numTraExists(String numTra, List<Animal> allAnimals) {
+    public boolean isNumTraExists(String numTra, List<Animal> allAnimals) {
 
         // Parcourir la liste de tous les animaux de l'élevage
         for (Animal animal : allAnimals) {
