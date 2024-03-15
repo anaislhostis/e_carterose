@@ -1,175 +1,128 @@
 package com.example.e_carterose;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.widget.Toast;
-
-import com.example.e_carterose.databinding.FragmentFormulaireMortBinding;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import android.util.Log;
 
-
-public class FormulaireMortFragment extends Fragment {
+public class VisualisationAnimauxMortsFragment extends Fragment {
 
     private DatabaseAccess db;
-    private List<Animal> allAnimals; // Variable pour stocker la liste complète des animaux
+    private List<Animal> DeadNotifiedAnimals; // Variable pour stocker la liste complète des animaux notifié morts
+    private String numTra;
+    private LinearLayout layout;
+    private int selectedIndex = -1;
 
-    private EditText editTextNumTra;
-    private Button buttonSubmit;
-    private Button buttonEffacer;
-    private Button buttonVoirNotifMort;
-    private FragmentFormulaireMortBinding binding;
 
-    public static FormulaireMortFragment newInstance() {
-        FormulaireMortFragment fragment = new FormulaireMortFragment();
+    public static VisualisationAnimauxMortsFragment newInstance() {
+        VisualisationAnimauxMortsFragment fragment = new VisualisationAnimauxMortsFragment();
+
         return fragment;
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentFormulaireMortBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_visualisation_animaux_morts, container, false); // Initialiser la vue
+        layout = rootView.findViewById(R.id.dead_animals_container); // Récupérer le layout pour afficher les animaux
 
-        // Acces à la BDD
-        db = new DatabaseAccess(requireContext());
+        db = new DatabaseAccess(requireContext()); // Initialiser la base de données
 
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
-        Log.e("numéro élevage :", numElevage);
 
-        // Récupération de la liste des numTra des animaux morts
-        String numTraAnimauxMorts = ((MainActivity) requireActivity()).getNumTraAnimauxMorts().toString();
+        // Récupérer tous les animaux de l'élevage notifié morts (actif = -1)
+        DeadNotifiedAnimals = db.getDeadNotifiedAnimalsByElevage(numElevage);
+        Log.e("DeadNotifiedAnimals : ", DeadNotifiedAnimals.toString());
 
-        // Récupérer les informations sur l'élevage depuis la base de données
-        Elevage elevage = db.getElevageByNumero(numElevage);
-
-        // Récupérer tous les animaux de l'élevage
-        allAnimals = db.getAnimalsByElevage(numElevage);
-        Log.e("Animal :", allAnimals.toString());
+        // Mise à jour de l'affichage des animaux notifés morts
+        updateAnimalViews(DeadNotifiedAnimals);
 
 
-        // Récupérer les références des editText/Boutton du formulaire
-        buttonSubmit = view.findViewById(R.id.buttonSubmit);
-        buttonEffacer = view.findViewById(R.id.buttonEffacer);
-        buttonVoirNotifMort = view.findViewById(R.id.buttonVoirNotifMort);
-        editTextNumTra = view.findViewById(R.id.editTextNumTra);
-
-        // Bouton soumettre
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Afficher le popup de confirmation de suppression
-                popupConfirmationNotificationMort();
-
-                // Réinitialiser le texte de l'EditText
-                editTextNumTra.setText("");
-            }
-        });
-
-        // Bouton effacer
-        buttonEffacer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Réinitialiser le texte de l'EditText
-                editTextNumTra.setText("");
-            }
-        });
-
-        // Bouton notification de mort
-        binding.buttonVoirNotifMort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Créer une instance de VisualisationAnimauxMortsFragment
-                VisualisationAnimauxMortsFragment visualisationAnimauxMortsFragment = VisualisationAnimauxMortsFragment.newInstance();
-
-                // Remplacer le fragment actuel par le fragment VisualisationAnimauxMortsFragment
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.container, visualisationAnimauxMortsFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        return rootView;
     }
 
 
+    public void updateAnimalViews(List<Animal> DeadNotifiedAnimals){
+        layout.removeAllViews(); // Supprimer tous les éléments actuellement affichés
 
-    // Popup pour la confirmation de notification de mort de l'animal
-    private void popupConfirmationNotificationMort() {
-        // Récupération du numéro de travail entré dans le formulaire
-        String numTra = editTextNumTra.getText().toString();
+        String numElevage = MainActivity.numeroElevage; //Récupérer le numéro d'élevage
 
-        Log.e("Numéro de travail :", numTra);
+        for (int i = 0; i < DeadNotifiedAnimals.size(); i++) {
+            Animal animal = DeadNotifiedAnimals.get(i);
+            // Créer et ajouter les vues pour chaque animal
+            View animalView = LayoutInflater.from(requireContext()).inflate(R.layout.animal_item, layout, false);
+            TextView textViewNumTra = animalView.findViewById(R.id.text_view_num_tra);
+            TextView textViewNom = animalView.findViewById(R.id.text_view_nom);
+            TextView textViewDateNaiss = animalView.findViewById(R.id.text_view_date_naiss);
+            TextView textViewSexe = animalView.findViewById(R.id.text_view_sexe);
 
-        // Vérifier si le numéro de travail est déjà présent dans la liste des animaux morts
-        if (((MainActivity) requireActivity()).getNumTraAnimauxMorts().contains(numTra)) {
-            // Afficher un message d'erreur
-            Toast.makeText(requireContext(), "L'animal " + numTra + " a déjà été notifié mort.", Toast.LENGTH_SHORT).show();
-            return; // Arrêter l'exécution de la méthode si le numéro de travail est déjà présent dans la liste
-        }
+            textViewNumTra.setText("Numéro de travail: " + animal.getNumTra());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Confirmer la notification de mort");
-        builder.setMessage(String.format("Êtes-vous sûr de vouloir notifier l'animal %s comme mort ?", numTra));
-        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            String nom = animal.getNom();
+            if (nom != null) {
+                textViewNom.setText("Nom: " + animal.getNom());
+            } else {
+                Spanned spannedText = HtmlCompat.fromHtml("Nom: " + "<i>" + "non attribué" + "</i>", HtmlCompat.FROM_HTML_MODE_LEGACY);
+                textViewNom.setText(spannedText);
+            }
 
-                // Vérifier si l'animal avec le numéro de travail donné existe déjà dans la base de données
-                if (animalExists(numTra)) {
-                    // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
-                    MainActivity mainActivity = (MainActivity) requireActivity();
-                    mainActivity.ajouterAnimalMort(numTra);
+            String dateNaissance = animal.getDateNaiss();
+            if (dateNaissance != null && dateNaissance.length() >= 10) {
+                textViewDateNaiss.setText("Date de naissance: " + dateNaissance.substring(0, 10));
+            }
 
-                    Log.e("Liste des animaux morts :", ((MainActivity) requireActivity()).getNumTraAnimauxMorts().toString());
+            String sexe = animal.getSexe();
+            if (sexe.equals("1")) {
+                textViewSexe.setText("Sexe: Mâle");
+            } else if (sexe.equals("2")) {
+                textViewSexe.setText("Sexe: Femelle");
+            }
 
-                    // Afficher un message de confirmation
-                    Toast.makeText(requireContext(), "L'animal " + numTra + " a été notifié comme mort.", Toast.LENGTH_SHORT).show();
+            // Ajouter des logs pour visualiser les valeurs
+            Log.d("VisualisationElevageFragment", "Numéro de travail: " + animal.getNumTra());
+            Log.d("VisualisationElevageFragment", "Nom: " + animal.getNom());
+            Log.d("VisualisationElevageFragment", "Date de naissance: " + dateNaissance);
+            Log.d("VisualisationElevageFragment", "Sexe: " + animal.getSexe());
 
+            final int index = i;
+            animalView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Animal selectedAnimal = DeadNotifiedAnimals.get(index);
 
-                } else {
-                    // Afficher un message d'erreur
-                    Toast.makeText(requireContext(), "L'animal " + numTra + " n'existe pas dans votre élevage.", Toast.LENGTH_SHORT).show();
+                    // Passer les données de l'animal au fragment de détails
+                    DetailsAnimalMortFragment detailsAnimalMortFragment = new DetailsAnimalMortFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("animal", (Serializable) selectedAnimal);
+                    detailsAnimalMortFragment.setArguments(bundle);
+
+                    // Remplacer le contenu actuel par le fragment de détails
+                    requireActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, detailsAnimalMortFragment)
+                            .addToBackStack(null) // Pour ajouter le fragment à la pile de retour
+                            .commit();
                 }
-            }
-        });
+            });
 
-        builder.setNegativeButton("Non", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+            // Ajouter la vue de l'animal à ton layout principal
+            layout.addView(animalView);
 
-    // Fonction pour vérifier si un animal avec le numéro de travail donné existe dans l'élevage
-    private boolean animalExists(String numTra) {
-        // Parcourir la liste de tous les animaux de l'élevage
-        for (Animal animal : allAnimals) {
 
-            // Vérifier si le numéro de travail de l'animal correspond au numéro de travail donné
-            if (animal.getNumTra().equals(numTra)) {
-                // Retourner vrai si l'animal existe
-                return true;
-            }
         }
-        // Retourner faux si l'animal n'existe pas
-        return false;
     }
 }
