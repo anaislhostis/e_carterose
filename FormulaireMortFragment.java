@@ -129,7 +129,7 @@ public class FormulaireMortFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 // Vérifier si l'animal avec le numéro de travail donné existe déjà dans la base de données
-                if (db.numTraExists(numTra, allAnimals)) {
+                if (db.isNumTraExists(numTra, allAnimals)) {
                     // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
                     MainActivity mainActivity = (MainActivity) requireActivity();
                     mainActivity.addDeadAnimal(numTra);
