@@ -26,6 +26,7 @@ public class FormulaireMortFragment extends Fragment {
 
     private DatabaseAccess db;
     private List<Animal> allAnimals; // Variable pour stocker la liste complète des animaux
+    private List<Animal> DeadNotifiedAnimals; // Variable pour stocker la liste complète des animaux notifié morts
     private EditText editTextNumTra;
     private Button buttonSubmit;
     private Button buttonEffacer;
@@ -73,7 +74,7 @@ public class FormulaireMortFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Afficher le popup de confirmation de suppression
-                popupConfirmationDeathNotification();
+                popupConfirmationDeathNotification(numElevage);
 
                 // Réinitialiser le texte de l'EditText
                 editTextNumTra.setText("");
@@ -89,7 +90,7 @@ public class FormulaireMortFragment extends Fragment {
             }
         });
 
-        // Bouton notification de mort
+        // Bouton voir les notifications de mort
         binding.buttonVoirNotifMort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,18 +109,22 @@ public class FormulaireMortFragment extends Fragment {
 
 
     // Popup pour la confirmation de notification de mort de l'animal
-    private void popupConfirmationDeathNotification() {
+    private void popupConfirmationDeathNotification(String numElevage) {
         // Récupération du numéro de travail entré dans le formulaire
         String numTra = editTextNumTra.getText().toString();
-
         Log.e("Numéro de travail :", numTra);
 
-        // Vérifier si le numéro de travail est déjà présent dans la liste des animaux morts
-        if (((MainActivity) requireActivity()).getNumTraAnimauxMorts().contains(numTra)) {
-            // Afficher un message d'erreur
-            Toast.makeText(requireContext(), "L'animal " + numTra + " a déjà été notifié mort.", Toast.LENGTH_SHORT).show();
-            return; // Arrêter l'exécution de la méthode si le numéro de travail est déjà présent dans la liste
+
+        // Vérifier si l'animal a déjà été déclaré morts
+        DeadNotifiedAnimals = db.getDeadNotifiedAnimalsByElevage(numElevage);
+        for (Animal animal : DeadNotifiedAnimals) {
+            if (animal.getNumTra().equals(numTra)) {
+                // L'animal a déjà été notifié mort
+                Toast.makeText(requireContext(), "L'animal " + numTra + " a déjà été notifié mort.", Toast.LENGTH_SHORT).show();
+                return; // Arrêter l'exécution de la méthode si le numéro de travail est déjà présent dans la liste
+            }
         }
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmer la notification de mort");
@@ -128,16 +133,13 @@ public class FormulaireMortFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                // Vérifier si l'animal avec le numéro de travail donné existe déjà dans la base de données
+                // Vérifier si l'animal avec le numéro de travail donné existe dans la base de données
                 if (db.isNumTraExists(numTra, allAnimals)) {
-                    // Ajouter le numéro de travail dans la liste des animaux morts du MainActivity
-                    MainActivity mainActivity = (MainActivity) requireActivity();
-                    mainActivity.addDeadAnimal(numTra);
 
                     // Modifier le statut de l'animal (actif = 2)
-                    db.updateStatusNotifiedDeadByEleveur(numTra);
+                    db.updateStatus(numElevage, numTra, -1);
 
-                    Log.e("Liste des animaux morts :", ((MainActivity) requireActivity()).getNumTraAnimauxMorts().toString());
+                    Log.e("Liste des animaux morts :", db.getDeadNotifiedAnimalsByElevage(numElevage).toString());
 
                     // Afficher un message de confirmation
                     Toast.makeText(requireContext(), "L'animal " + numTra + " a été notifié comme mort.", Toast.LENGTH_SHORT).show();
