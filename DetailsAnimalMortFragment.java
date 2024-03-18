@@ -1,40 +1,4 @@
-package com.example.e_carterose;
-
-import static com.example.e_carterose.FragmentQRCode.generateQRContent;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.pdf.PdfDocument;
-import android.os.Bundle;
-import android.os.Environment;
-import android.text.Html;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-public class DetailsAnimalMortFragment extends Fragment {
-    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private Animal selectedAnimal;
     private DatabaseAccess db;
 
@@ -148,8 +112,9 @@ public class DetailsAnimalMortFragment extends Fragment {
         buttonRecupEquarisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String numNat = selectedAnimal.getNumNat();
-                popupConfirmationRecoveryDeadAnimal(numNat);
+                String numTra = selectedAnimal.getNumTra();
+                String numElevage = selectedAnimal.getNumElevage();
+                popupConfirmationRecoveryDeadAnimal(numElevage, numTra);
             }
         });
 
@@ -325,7 +290,7 @@ public class DetailsAnimalMortFragment extends Fragment {
         document.close();
     }
 
-    private void popupConfirmationRecoveryDeadAnimal(String numNat) {
+    private void popupConfirmationRecoveryDeadAnimal(String numElevage, String numTra) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmation de récupération de l'animal");
         builder.setMessage(String.format("L'animal %s a-t-il été récupéré par l'équarrisseur ?", selectedAnimal.getNumTra()));
@@ -334,13 +299,10 @@ public class DetailsAnimalMortFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 //Appeler la fonction qui change le satut de l'animal (passe à 0 = non actif)
-                db.updateStatus(numNat);
+                db.updateStatus(numElevage, numTra, 0);
 
                 Toast.makeText(requireContext(), "L'animal a été récupéré par l'équarrisseur.", Toast.LENGTH_SHORT).show();
 
-                // On enlève l'animal de la page visualisation des animaux notifiés morts
-                // Supprimer le numéro de travail de l'animal de la liste des animaux morts dans MainActivity
-                ((MainActivity) requireActivity()).delDeadAnimal(selectedAnimal.getNumTra());
 
             }
         });
@@ -353,5 +315,3 @@ public class DetailsAnimalMortFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-}
