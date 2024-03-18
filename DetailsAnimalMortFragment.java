@@ -1,4 +1,40 @@
-private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+package com.example.e_carterose;
+
+import static com.example.e_carterose.FragmentQRCode.generateQRContent;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
+import android.os.Bundle;
+import android.os.Environment;
+import android.text.Html;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class DetailsAnimalMortFragment extends Fragment {
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private Animal selectedAnimal;
     private DatabaseAccess db;
 
@@ -315,3 +351,5 @@ private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+}
