@@ -17,6 +17,8 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import androidx.annotation.Nullable;
+
 
 public class VisualisationAnimauxMortsFragment extends Fragment {
 
@@ -37,6 +39,8 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        Log.e("FragmentLifecycle", "onCreateView called");
+
         View rootView = inflater.inflate(R.layout.fragment_visualisation_animaux_morts, container, false); // Initialiser la vue
         layout = rootView.findViewById(R.id.dead_animals_container); // Récupérer le layout pour afficher les animaux
 
@@ -55,6 +59,7 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
 
         return rootView;
     }
+
 
 
     public void updateAnimalViews(List<Animal> DeadNotifiedAnimals){
@@ -98,6 +103,8 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
             Log.d("VisualisationElevageFragment", "Nom: " + animal.getNom());
             Log.d("VisualisationElevageFragment", "Date de naissance: " + dateNaissance);
             Log.d("VisualisationElevageFragment", "Sexe: " + animal.getSexe());
+            Log.d("VisualisationElevageFragment", "Actif: " + animal.getActif());
+
 
             final int index = i;
             animalView.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +129,7 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
             // Ajouter la vue de l'animal à ton layout principal
             layout.addView(animalView);
 
-
         }
     }
+
 }
