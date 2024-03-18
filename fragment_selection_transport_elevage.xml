@@ -24,21 +24,43 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="30dp" />
 
 
-        <!-- Numéro d'élevage -->
+    <!-- Numéro de travail -->
     <TextView
-        android:id="@+id/textViewNumNat"
+        android:id="@+id/textViewNumTra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        android:text="Entrez le numéro d'élevage de l'exploitation d'arrivé :"
+        android:text="Entrez le numéro de travail de l'animal :"
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/editTextNumNat"
+        android:id="@+id/editTextNumTra"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 2308"
+        android:maxLength="8"
+        android:inputType="number" />
+
+    <!-- Numéro d'élevage -->
+    <TextView
+        android:id="@+id/textViewNumElevage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Entrez le numéro d'élevage de l'exploitation d'arrivée :"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/editTextNumElevage"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -51,7 +73,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="40dp" />
 
     <!-- Comment voulez-vous transférer votre animal ? -->
     <TextView
@@ -62,33 +84,39 @@
         android:text="Comment voulez-vous transférer votre animal ?"
         android:textSize="14sp" />
 
-    <!-- Boutons -->
-    <LinearLayout
-        android:id="@+id/buttonContainer"
+    <!-- CheckBox -->
+    <RadioGroup
+        android:id="@+id/radioGroupTransfert"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
 
-        <!-- Bouton Eleveur -->
-        <Button
+        <!-- Transport direct -->
+        <RadioButton
             android:id="@+id/BoutonTransfertDirect"
             style="@style/ButtonEleveur"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
+            android:layout_width="185dp"
+            android:layout_height="39dp"
+            android:layout_margin="7dp"
+            android:textSize="14sp"
             android:text="Transfert direct" />
 
-        <!-- Bouton Controleur -->
-        <Button
+        <!-- Transport indirect -->
+        <RadioButton
             android:id="@+id/BoutonTransfertIndirect"
             style="@style/ButtonEleveur"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
+            android:layout_width="185dp"
+            android:layout_height="39dp"
+            android:layout_margin="7dp"
+            android:textSize="14sp"
             android:text="Transfert indirect" />
 
-    </LinearLayout>
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
 
     <!-- *Transfert indirect -->
     <TextView
@@ -98,4 +126,40 @@
         android:textColor="#808080"
         android:text="*Transfert indirect = tranfert avec transporteur"
         android:textSize="12sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+    <!-- Layout horizontal pour les boutons Soumettre et Effacer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <!-- Bouton soumettre -->
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            style="@style/ButtonEleveur"
+            android:text="Soumettre" />
+
+        <!-- Bouton effacer -->
+        <Button
+            android:id="@+id/buttonEffacer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            style="@style/ButtonEffacerFormulaire"
+            android:text="Effacer" />
+
+    </LinearLayout>
 </LinearLayout>
