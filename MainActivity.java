@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     public static String numeroElevage;
     public static String asda;
     private List<String> numTraAnimauxMorts;
+    private List<String> numNatAnimauxTransfert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,27 +22,9 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.container, new IndexFragment())
                 .commit();
 
-        // Initialiser la liste des numéros de travail des animaux morts
-        numTraAnimauxMorts = new ArrayList<>();
-    }
-
-
-    // Méthode pour ajouter un numéro de travail à la liste des animaux morts
-    public void ajouterAnimalMort(String numeroTravail) {
-        numTraAnimauxMorts.add(numeroTravail);
-    }
-
-    
-    // Méthode pour supprimer un numéro de travail de la liste des animaux morts
-    public void supprimerAnimalMort(String numeroTravail) {
-        numTraAnimauxMorts.remove(numeroTravail);
+        
     }
     
-
-    // Méthode pour récupérer la liste des numéros de travail des animaux morts
-    public List<String> getNumTraAnimauxMorts() {
-        return numTraAnimauxMorts;
-    }
 
 
 }
