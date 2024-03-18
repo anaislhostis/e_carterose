@@ -65,6 +65,21 @@ public class SelectionEndroitTransfertFragment extends Fragment {
             }
         });
 
+        // Bouton transférer un animal
+        binding.BoutonVoirMesTransferts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer une instance de AnimauxEnTransfertFragment
+                AnimauxEnTransfertFragment animauxEnTransfertFragment = AnimauxEnTransfertFragment.newInstance();
+
+                // Remplacer le fragment actuel par le fragment AnimauxEnTransfertFragment
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, animauxEnTransfertFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
 
     }
 }
