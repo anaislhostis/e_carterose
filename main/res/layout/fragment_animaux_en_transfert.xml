@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="ExtraText">
+
+        <!-- Titre de la page -->
+        <TextView
+            android:id="@+id/TitreAnimauxEnTransfert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Animaux en transfert"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <!-- Animaux en transfert vers mon élevage -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="Animaux en transfert vers mon élevage :"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/arrivals_animals_container"
+            style = "@style/AnimalContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+
+        <!-- Animaux en transfert vers un autre élevage -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Animaux en transfert vers un autre élevage :"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/departures_animals_container"
+            style = "@style/AnimalContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <!-- Animaux en transfert vers l'abattoir -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Animaux en transfert vers l'abattoir :"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/slaughterhouse_animals_container"
+            style = "@style/AnimalContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

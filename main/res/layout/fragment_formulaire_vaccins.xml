@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FormulaireMortFragment">
+
+    <!-- Titre du formulaire -->
+    <TextView
+        android:id="@+id/TitreFormAddVaccines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text=" Ajouter un vaccin à l'animal n°"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <!-- Nom du vaccin -->
+    <TextView
+        android:id="@+id/textViewNomVaccin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:text="Nom du vaccin :"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editTextNomVaccin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : "
+        android:inputType="textCapCharacters" />
+
+    <!-- Dose -->
+    <TextView
+        android:id="@+id/textViewDose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Dose (en g) :"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editTextDose"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 16"
+        android:maxLength="4"
+        android:inputType="number" />
+
+    <!-- Date d'administration-->
+    <TextView
+        android:id="@+id/textViewDateVaccin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Date d'administration :"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonPickDateVaccin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Choisir une date"
+        android:background="@drawable/border_formulaire_date"
+        style="@style/ButtonDateFormulaire"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <!-- Layout horizontal pour les boutons Soumettre et Effacer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <!-- Bouton soumettre -->
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            style="@style/ButtonEleveur"
+            android:text="Soumettre" />
+
+        <!-- Bouton effacer -->
+        <Button
+            android:id="@+id/buttonEffacer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            style="@style/ButtonEffacerFormulaire"
+            android:text="Effacer" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
