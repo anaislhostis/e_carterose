@@ -1,6 +1,6 @@
 package com.example.e_carterose;
 
-import static com.example.e_carterose.FragmentQRCode.generateQRContent;
+import static com.example.e_carterose.QRCodeFragment.generateQRContent;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -110,7 +110,7 @@ public class DetailsAnimalFragment extends Fragment {
             public void onClick(View v) {
                 // Replace current layout with QR code layout
 
-                FragmentQRCode fragment_qr_code = new FragmentQRCode();
+                QRCodeFragment fragment_qr_code = new QRCodeFragment();
 
                 // Pass animal data to QR code fragment
                 Bundle args = new Bundle();
@@ -136,6 +136,14 @@ public class DetailsAnimalFragment extends Fragment {
 
         return rootView;
     }
+
+
+
+
+
+
+
+
 
     private void generatePDF() {
         // Vérifier si la permission WRITE_EXTERNAL_STORAGE est accordée
@@ -281,7 +289,7 @@ public class DetailsAnimalFragment extends Fragment {
 
         // Récupérer toutes les informations de l'animal
         String animalInfo = generateQRContent(selectedAnimal);
-        FragmentQRCode fragmentQRCode = new FragmentQRCode();
+        QRCodeFragment fragmentQRCode = new QRCodeFragment();
         Bitmap qrCodeBitmap = fragmentQRCode.generateQRCodeBitmap(animalInfo, requireContext(), 300, 300);
 
         // Si le bitmap du QR code est disponible, dessinez-le sur le canevas
