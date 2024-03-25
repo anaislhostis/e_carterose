@@ -95,10 +95,20 @@ public class VisualisationElevageFragment extends Fragment {
         if (isNetworkAvailable()) {
             Log.e("NETWORK", "Connexion Internet disponible");
 
-            fetchElevageData(num_elevage);
-            Log.d("onCreateView", "Informations de l'élevage récupérées");
-            fetchAnimauxData(num_elevage);
-            Log.d("onCreateView", "Informations des animaux récupérées");
+            //fetchElevageData(num_elevage);
+            //Log.d("onCreateView", "Informations de l'élevage récupérées");
+            //fetchAnimauxData(num_elevage);
+            //Log.d("onCreateView", "Informations des animaux récupérées");
+
+
+            //Code à enlever quand l'API sera ok :
+            allAnimals = db.getAnimalsByElevage(num_elevage);
+            String codAsda = db.getCodAsdaByNumElevage(num_elevage);
+            textViewNomElevage.setText(db.getNomElevageByNumero(num_elevage));
+            setAttestationColor(codAsda);
+
+            updateAnimalViews(allAnimals);
+            
 
             Toast.makeText(context, "Les données sont chargées depuis le server.", Toast.LENGTH_SHORT).show();
 
