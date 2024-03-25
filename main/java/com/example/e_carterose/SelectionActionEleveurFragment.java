@@ -53,16 +53,16 @@ public class SelectionActionEleveurFragment extends Fragment {
         if (isNetworkAvailable()) {
             Log.e("NETWORK", "Connexion Internet disponible");
 
-            fetchAnimauxData();
-            fetchElevageData();
+            //fetchAnimauxData();
+            //fetchElevageData();
 
-            db.sendAllAnimauxToServer();
-            db.sendAllElevagesToServer();
-            db.getDistinctLocalElevageNumbers();
+            //db.sendAllAnimauxToServer();
+            //db.sendAllElevagesToServer();
+            //db.getDistinctLocalElevageNumbers();
 
-            db.synchronizeElevagesData(); // Synchroniser les données de la table elevage
-            db.synchronizeAnimauxData(); // Synchroniser les données de la table animal
-            Log.e("NETWORK", "Données synchronisées");
+            //db.synchronizeElevagesData(); // Synchroniser les données de la table elevage
+            //db.synchronizeAnimauxData(); // Synchroniser les données de la table animal
+            //Log.e("NETWORK", "Données synchronisées");
 
         } else {
             Log.e("NETWORK", "Connexion Internet non disponible");
