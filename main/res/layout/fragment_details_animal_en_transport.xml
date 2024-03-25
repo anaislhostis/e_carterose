@@ -148,44 +148,127 @@
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
+        <!-- Vaccins -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="Vaccins :  "
+            android:textSize="18dp"/>
+
 
         <LinearLayout
-            android:id="@+id/buttonContainer"
+
+            android:id="@+id/animals_vaccines_container"
+            style = "@style/AnimalContainer"
+            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:backgroundTint="@color/green"
+            android:background="@drawable/border_shape"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/buttonQRCode"
-                style="@style/ButtonAnimalDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Afficher le QR Code" />
-
-            <Button
-                android:id="@+id/buttonTelecharger"
-                style="@style/ButtonAnimalDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Télécharger la carte rose" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="5dp" />
 
-            <Button
-                android:id="@+id/buttonRecupEquarisseur"
-                style="@style/ButtonAnimalDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Animal récupéré par l'équarisseur ?" />
 
 
         </LinearLayout>
 
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+
+        <!-- Soins -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="Soins :  "
+            android:textSize="18dp"/>
+
+
+        <LinearLayout
+
+            android:id="@+id/animals_care_container"
+            style = "@style/AnimalContainer"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:background="@drawable/border_shape"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+        </LinearLayout>
+
+
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Premier conteneur pour les deux premiers boutons -->
+            <LinearLayout
+                android:id="@+id/buttonContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonQRCode"
+                    style="@style/ButtonAnimalDetail"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Afficher le QR Code" />
+
+                <Button
+                    android:id="@+id/buttonTelecharger"
+                    style="@style/ButtonAnimalDetail"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Télécharger la carte rose" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></Space>
+
+            <!-- Deuxième conteneur pour le troisième bouton centré verticalement -->
+            <Button
+                android:id="@+id/buttonAjouterListeTransport"
+                style="@style/ButtonEleveur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Ajouter à la liste des animaux à transporter" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
+
+
+
 </ScrollView>

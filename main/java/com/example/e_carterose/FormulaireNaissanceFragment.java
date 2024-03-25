@@ -1,5 +1,6 @@
 package com.example.e_carterose;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,21 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import android.app.DatePickerDialog;
-import java.util.Date;
-import java.text.ParseException;
 
 
 public class FormulaireNaissanceFragment extends Fragment {
@@ -61,9 +61,8 @@ public class FormulaireNaissanceFragment extends Fragment {
 
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
+        allAnimals = db.getActiveAnimalsByElevage(numElevage);
 
-        // Récupérer tous les animaux actif (=1) de l'élevage
-        allAnimals = db.getAnimalsByElevageAndActif(numElevage, 1);
 
 
         // Récupérer les références des editText/Spinner/Boutton du formulaire
@@ -129,16 +128,8 @@ public class FormulaireNaissanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                // Vérifier que le nombre de chiffres entré dans les champs du formulaire correspond à la longueur maximale spécifiée dans le layout
-                String numNat = editTextNumNat.getText().toString();
-                if (numNat.length() != 10) {
-                    // Afficher un message d'erreur
-                    Toast.makeText(requireContext(), "Le numéro national doit contenir exactement " + 10 + " chiffres.", Toast.LENGTH_SHORT).show();
-                    return; // Arrêter l'exécution de la méthode
-                }
-
                 // Vérifier si le numéro de travail entré existe déjà dans l'élevage
+                String numNat = editTextNumNat.getText().toString();
                 String numTra = numNat.substring(numNat.length() - 4); // Obtient les 4 derniers chiffres de numNat comme numTra ;
                 if (db.isNumTraExists(numTra, allAnimals)) {
                     // Afficher un message d'erreur
@@ -146,6 +137,12 @@ public class FormulaireNaissanceFragment extends Fragment {
                     return; // Arrêter l'exécution de la méthode
                 }
 
+                // Vérifier que le nombre de chiffres entré dans les champs du formulaire correspond à la longueur maximale spécifiée dans le layout
+                if (numNat.length() != 10) {
+                    // Afficher un message d'erreur
+                    Toast.makeText(requireContext(), "Le numéro national doit contenir exactement " + 10 + " chiffres.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
                 String codeRace = editTextCodeRace.getText().toString();
                 if (codeRace.length() != 2) {
                     // Afficher un message d'erreur
@@ -192,7 +189,7 @@ public class FormulaireNaissanceFragment extends Fragment {
                 //Appeler la fonction de sauvgarde des données dans la bdd (insertion d'une nouvelle ligne)
                 saveFormData();
 
-                // Réinitialiser le texte de tous les EditText lorsque la sauvegarde a réussie
+                // Réinitialiser le texte de tous les EditText
                 editTextNom.setText("");
                 editTextNumNat.setText("");
                 editTextCodeRace.setText("");
@@ -325,7 +322,7 @@ public class FormulaireNaissanceFragment extends Fragment {
 
 
             // Ajouter ces données à la base de données
-            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais,  codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace, actif);
+            long newRowId = db.insertAnimal(numNat, numTra, codePays, nom, sexe, dateNais, codePaysNais, numExpNais, codePaysPere, numNatPere, codeRacePere, codePaysMere, numNatMere, codeRaceMere, numElevage, codeRace, actif);
 
             // Vérifier si l'insertion a réussi
             if (newRowId > 0) {

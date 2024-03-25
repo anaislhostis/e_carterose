@@ -13,6 +13,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,40 +28,32 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class DetailsAnimalFragment extends Fragment {
+public class DetailsAnimalEnTransportFragment extends Fragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private List<Animal> animaux_en_transport = MainActivity.animaux_en_transport;
     private Animal selectedAnimal;
-    private DatabaseAccess db;
+    private String num_elevage;
     private List<Vaccins> listVaccines; // Liste contenant tous les vaccins de la table
     private List<Soins> listCare; // Liste contenant tous les soins de la table
     private LinearLayout vaccinesContainer; //Layout pour afficher les vaccins dans un layout
     private LinearLayout careContainer; //Layout pour afficher les soins dans un layout
-
-
+    private DatabaseAccess db;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_details_animal, container, false);
+        // Inflate le layout pour ce fragment
+        View rootView = inflater.inflate(R.layout.fragment_details_animal_en_transport, container, false);
 
-        db = new DatabaseAccess(requireContext());
-        QRCodeFragment fragment = new QRCodeFragment();
-        fragment.setDatabaseAccess(db);
 
-        // Retrieve animal data from arguments
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            selectedAnimal = (Animal) bundle.getSerializable("animal");
-        }
-
-        // Initialize views
+        // Initialiser les vues
         TextView textViewNom = rootView.findViewById(R.id.detail_nom);
         TextView textViewNumTra = rootView.findViewById(R.id.num_tra);
         TextView textViewDateNaiss = rootView.findViewById(R.id.detail_date_naiss);
@@ -71,256 +64,234 @@ public class DetailsAnimalFragment extends Fragment {
         TextView textViewNumNatPere = rootView.findViewById(R.id.num_nat_pere);
         TextView textViewNumNatMere = rootView.findViewById(R.id.num_nat_mere);
 
-        // Display animal details
-        textViewNom.setText(Html.fromHtml("<b>Nom:</b> " + (selectedAnimal.getNom() != null && !selectedAnimal.getNom().isEmpty() ? selectedAnimal.getNom() : "<i>Non attribué</i>")));
 
-        if(selectedAnimal.getDateNaiss().length() >= 10) {
-            textViewDateNaiss.setText(Html.fromHtml("<b>Date de naissance:</b> " + selectedAnimal.getDateNaiss().substring(0, 10)));
-        } else {
-            textViewDateNaiss.setText(Html.fromHtml("<b>Date de naissance:</b> " + selectedAnimal.getDateNaiss()));
-        }
-
-        textViewNumTra.setText(Html.fromHtml("<b>Animal n° :</b> " + selectedAnimal.getNumTra()));
-        textViewSexe.setText(Html.fromHtml("<b>Sexe:</b> " + (selectedAnimal.getSexe().equals("1") ? "Mâle" : "Femelle")));
-
-        String race = selectedAnimal.getRace();
-        if (race != null && !race.isEmpty()) {
-            textViewRace.setText(Html.fromHtml("<b>Race:</b> " + race));
-        } else {
-            textViewRace.setVisibility(View.GONE);
-        }
-
-        String racePere = selectedAnimal.getCodRacePere();
-        if (racePere != null && !racePere.isEmpty()) {
-            textViewRacePere.setText(Html.fromHtml("<b>Race du père:</b> " + racePere));
-        } else {
-            textViewRacePere.setVisibility(View.GONE);
-        }
-
-        String raceMere = selectedAnimal.getCodRaceMere();
-        if (raceMere != null && !raceMere.isEmpty()) {
-            textViewRaceMere.setText(Html.fromHtml("<b>Race de la mère:</b> " + raceMere));
-        } else {
-            textViewRaceMere.setVisibility(View.GONE);
-        }
-
-        String numNatPere = selectedAnimal.getNumNatPere();
-        if (numNatPere != null && !numNatPere.isEmpty()) {
-            textViewNumNatPere.setText(Html.fromHtml("<b>Numéro national du père:</b> " + numNatPere));
-        } else {
-            textViewNumNatPere.setVisibility(View.GONE);
-        }
-
-        String numNatMere = selectedAnimal.getNumNatMere();
-        if (numNatMere != null && !numNatMere.isEmpty()) {
-            textViewNumNatMere.setText(Html.fromHtml("<b>Numéro national de la mère:</b> " + numNatMere));
-        } else {
-            textViewNumNatMere.setVisibility(View.GONE);
+        // Récupérer les arguments passés au fragment
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            selectedAnimal = (Animal) bundle.getSerializable("animal");
         }
 
 
-        // Récupérer le numNat de l'animal
-        String numNat = selectedAnimal.getNumNat();
+        // Accéder à la base de données
+        db = new DatabaseAccess(requireContext());
 
-        // Récupérer la liste des vaccins qui concerne l'animal
-        listVaccines = db.getVaccinesByNumNat(numNat);
-
-        // Récupérer une référence au layout pour afficher les vaccins
-        vaccinesContainer = rootView.findViewById(R.id.animals_vaccines_container);
-
-        // Vérifier si la liste des vaccins est vide
-        if (listVaccines.isEmpty()) {
-            // La liste des vaccins est vide
-            TextView textViewNoVaccines = new TextView(requireContext());
-            textViewNoVaccines.setText(Html.fromHtml("<i>Pas de vaccins recensés pour cet animal</i>"));
-            textViewNoVaccines.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            vaccinesContainer.addView(textViewNoVaccines);
-
-        } else {
-            // Créer un TableLayout
-            TableLayout tableLayoutVaccines = new TableLayout(requireContext());
-
-            // Créer un TableRow pour les en-têtes
-            TableRow headerRow = new TableRow(requireContext());
-            TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
-            headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-            // Créer des TextView pour les en-têtes de colonnes
-            TextView headerNom = new TextView(requireContext());
-            TextView headerDose = new TextView(requireContext());
-            TextView headerDate = new TextView(requireContext());
+        if (selectedAnimal != null) {
+            textViewNom.setText(Html.fromHtml("<b>Nom:</b> " + (selectedAnimal.getNom() != null && !selectedAnimal.getNom().isEmpty() ? selectedAnimal.getNom() : "<i>Non attribué</i>")));
 
 
+            if (selectedAnimal.getDateNaiss().length() >= 10) {
+                textViewDateNaiss.setText(Html.fromHtml("<b>Date de naissance:</b> " + selectedAnimal.getDateNaiss().substring(0, 10)));
+            } else {
+                textViewDateNaiss.setText(Html.fromHtml("<b>Date de naissance:</b> " + selectedAnimal.getDateNaiss()));
+            }
 
-            // Définir les en-têtes des colonnes en gras
-            headerNom.setTypeface(null, Typeface.BOLD);
-            headerNom.setText("Nom");
-            headerDose.setTypeface(null, Typeface.BOLD);
-            headerDose.setText("Dose (g)");
-            headerDate.setTypeface(null, Typeface.BOLD);
-            headerDate.setText("Date");
+            textViewNumTra.setText(Html.fromHtml("<b>Animal n° :</b> " + selectedAnimal.getNumTra()));
+            textViewSexe.setText(Html.fromHtml("<b>Sexe:</b> " + (selectedAnimal.getSexe().equals("1") ? "Mâle" : "Femelle")));
 
-            // Ajout des en-têtes de colonnes au TableRow
-            headerRow.addView(headerNom, headerParams);
-            headerRow.addView(headerDose, headerParams);
-            headerRow.addView(headerDate, headerParams);
+            String race = selectedAnimal.getRace();
+            if (race != null && !race.isEmpty()) {
+                textViewRace.setText(Html.fromHtml("<b>Race:</b> " + race));
+            } else {
+                textViewRace.setVisibility(View.GONE);
+            }
 
-            // Ajout du TableRow au TableLayout
-            tableLayoutVaccines.addView(headerRow);
+            String racePere = selectedAnimal.getCodRacePere();
+            if (racePere != null && !racePere.isEmpty()) {
+                textViewRacePere.setText(Html.fromHtml("<b>Race du père:</b> " + racePere));
+            } else {
+                textViewRacePere.setVisibility(View.GONE);
+            }
+
+            String raceMere = selectedAnimal.getCodRaceMere();
+            if (raceMere != null && !raceMere.isEmpty()) {
+                textViewRaceMere.setText(Html.fromHtml("<b>Race de la mère:</b> " + raceMere));
+            } else {
+                textViewRaceMere.setVisibility(View.GONE);
+            }
+
+            String numNatPere = selectedAnimal.getNumNatPere();
+            if (numNatPere != null && !numNatPere.isEmpty()) {
+                textViewNumNatPere.setText(Html.fromHtml("<b>Numéro national du père:</b> " + numNatPere));
+            } else {
+                textViewNumNatPere.setVisibility(View.GONE);
+            }
+
+            String numNatMere = selectedAnimal.getNumNatMere();
+            if (numNatMere != null && !numNatMere.isEmpty()) {
+                textViewNumNatMere.setText(Html.fromHtml("<b>Numéro national de la mère:</b> " + numNatMere));
+            } else {
+                textViewNumNatMere.setVisibility(View.GONE);
+            }
+
+            num_elevage = selectedAnimal.getNumElevage();
+
+            // Récupérer le numNat de l'animal
+            String numNat = selectedAnimal.getNumNat();
+
+            // Récupérer la liste des vaccins qui concerne l'animal
+            listVaccines = db.getVaccinesByNumNat(numNat);
+
+            // Récupérer une référence au layout pour afficher les vaccins
+            vaccinesContainer = rootView.findViewById(R.id.animals_vaccines_container);
+
+            // Vérifier si la liste des vaccins est vide
+            if (listVaccines.isEmpty()) {
+                // La liste des vaccins est vide
+                TextView textViewNoVaccines = new TextView(requireContext());
+                textViewNoVaccines.setText(Html.fromHtml("<i>Pas de vaccins recensés pour cet animal</i>"));
+                textViewNoVaccines.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                vaccinesContainer.addView(textViewNoVaccines);
+
+            } else {
+                // Créer un TableLayout
+                TableLayout tableLayoutVaccines = new TableLayout(requireContext());
+
+                // Créer un TableRow pour les en-têtes
+                TableRow headerRow = new TableRow(requireContext());
+                TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
+                headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
+                // Créer des TextView pour les en-têtes de colonnes
+                TextView headerNom = new TextView(requireContext());
+                TextView headerDose = new TextView(requireContext());
+                TextView headerDate = new TextView(requireContext());
 
 
-            // Parcourir la liste des vaccins pour ajouter les données au tableau
-            for (Vaccins vaccin : listVaccines) {
-                TableRow rowVaccine = new TableRow(requireContext());
-                TableRow.LayoutParams rowParamsVaccine = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
-                // Création des TextView pour les données du vaccin
-                TextView nomVaccin = new TextView(requireContext());
-                TextView doseVaccin = new TextView(requireContext());
-                TextView dateVaccin = new TextView(requireContext());
+                // Définir les en-têtes des colonnes en gras
+                headerNom.setTypeface(null, Typeface.BOLD);
+                headerNom.setText("Nom");
+                headerDose.setTypeface(null, Typeface.BOLD);
+                headerDose.setText("Dose (g)");
+                headerDate.setTypeface(null, Typeface.BOLD);
+                headerDate.setText("Date");
 
-                // Définition des données du vaccin
-                nomVaccin.setText(vaccin.getNomVaccin());
-                doseVaccin.setText(vaccin.getDose());
-                dateVaccin.setText(vaccin.getDateVaccin());
-
-                // Ajout des TextView au TableRow avec les paramètres de poids
-                rowVaccine.addView(nomVaccin, headerParams);
-                rowVaccine.addView(doseVaccin, headerParams);
-                rowVaccine.addView(dateVaccin, headerParams);
+                // Ajout des en-têtes de colonnes au TableRow
+                headerRow.addView(headerNom, headerParams);
+                headerRow.addView(headerDose, headerParams);
+                headerRow.addView(headerDate, headerParams);
 
                 // Ajout du TableRow au TableLayout
-                tableLayoutVaccines.addView(rowVaccine, rowParamsVaccine);
+                tableLayoutVaccines.addView(headerRow);
+
+
+                // Parcourir la liste des vaccins pour ajouter les données au tableau
+                for (Vaccins vaccin : listVaccines) {
+                    TableRow rowVaccine = new TableRow(requireContext());
+                    TableRow.LayoutParams rowParamsVaccine = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+
+                    // Création des TextView pour les données du vaccin
+                    TextView nomVaccin = new TextView(requireContext());
+                    TextView doseVaccin = new TextView(requireContext());
+                    TextView dateVaccin = new TextView(requireContext());
+
+                    // Définition des données du vaccin
+                    nomVaccin.setText(vaccin.getNomVaccin());
+                    doseVaccin.setText(vaccin.getDose());
+                    dateVaccin.setText(vaccin.getDateVaccin());
+
+                    // Ajout des TextView au TableRow avec les paramètres de poids
+                    rowVaccine.addView(nomVaccin, headerParams);
+                    rowVaccine.addView(doseVaccin, headerParams);
+                    rowVaccine.addView(dateVaccin, headerParams);
+
+                    // Ajout du TableRow au TableLayout
+                    tableLayoutVaccines.addView(rowVaccine, rowParamsVaccine);
+                }
+
+                // Ajout du TableLayout à votre conteneur de vaccins
+                vaccinesContainer.addView(tableLayoutVaccines);
             }
 
-            // Ajout du TableLayout à votre conteneur de vaccins
-            vaccinesContainer.addView(tableLayoutVaccines);
-        }
 
 
+            // Récupérer la liste des soins qui concerne l'animal
+            listCare = db.getCareByNumNat(numNat);
 
-        // Récupérer la liste des soins qui concerne l'animal
-        listCare = db.getCareByNumNat(numNat);
+            // Récupérer une référence au layout pour afficher les vaccins
+            careContainer = rootView.findViewById(R.id.animals_care_container);
 
-        // Récupérer une référence au layout pour afficher les vaccins
-        careContainer = rootView.findViewById(R.id.animals_care_container);
+            // Vérifier si la liste des vaccins est vide
+            if (listCare.isEmpty()) {
+                // La liste des vaccins est vide
+                TextView textViewNoCare = new TextView(requireContext());
+                textViewNoCare.setText(Html.fromHtml("<i>Pas de soins recensés pour cet animal</i>"));
+                textViewNoCare.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                careContainer.addView(textViewNoCare);
 
-        // Vérifier si la liste des vaccins est vide
-        if (listCare.isEmpty()) {
-            // La liste des vaccins est vide
-            TextView textViewNoCare = new TextView(requireContext());
-            textViewNoCare.setText(Html.fromHtml("<i>Pas de soins recensés pour cet animal</i>"));
-            textViewNoCare.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            careContainer.addView(textViewNoCare);
+            } else {
+                // Créer un TableLayout
+                TableLayout tableLayoutCare = new TableLayout(requireContext());
 
-        } else {
-            // Créer un TableLayout
-            TableLayout tableLayoutCare = new TableLayout(requireContext());
+                // Créer un TableRow pour les en-têtes
+                TableRow headerRow = new TableRow(requireContext());
+                TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
+                headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
-            // Créer un TableRow pour les en-têtes
-            TableRow headerRow = new TableRow(requireContext());
-            TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
-            headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                // Créer des TextView pour les en-têtes de colonnes
+                TextView headerNom = new TextView(requireContext());
+                TextView headerDose = new TextView(requireContext());
+                TextView headerDate = new TextView(requireContext());
 
-            // Créer des TextView pour les en-têtes de colonnes
-            TextView headerNom = new TextView(requireContext());
-            TextView headerDose = new TextView(requireContext());
-            TextView headerDate = new TextView(requireContext());
+                // Définir les en-têtes des colonnes en gras
+                headerNom.setTypeface(null, Typeface.BOLD);
+                headerNom.setText("Nom");
+                headerDose.setTypeface(null, Typeface.BOLD);
+                headerDose.setText("Dose (g)");
+                headerDate.setTypeface(null, Typeface.BOLD);
+                headerDate.setText("Date");
 
-            // Définir les en-têtes des colonnes en gras
-            headerNom.setTypeface(null, Typeface.BOLD);
-            headerNom.setText("Nom");
-            headerDose.setTypeface(null, Typeface.BOLD);
-            headerDose.setText("Dose (g)");
-            headerDate.setTypeface(null, Typeface.BOLD);
-            headerDate.setText("Date");
-
-            // Ajout des en-têtes de colonnes au TableRow
-            headerRow.addView(headerNom, headerParams);
-            headerRow.addView(headerDose, headerParams);
-            headerRow.addView(headerDate, headerParams);
-
-            // Ajout du TableRow au TableLayout
-            tableLayoutCare.addView(headerRow);
-
-            // Parcourir la liste des soins pour ajouter les données au tableau
-            for (Soins soin : listCare) {
-                TableRow rowCare = new TableRow(requireContext());
-                TableRow.LayoutParams rowParamsCare = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-
-                // Création des TextView pour les données du soin
-                TextView nomSoin = new TextView(requireContext());
-                TextView doseSoin = new TextView(requireContext());
-                TextView dateSoin = new TextView(requireContext());
-
-                // Définition des données du vaccin
-                nomSoin.setText(soin.getNomSoin());
-                doseSoin.setText(soin.getDose());
-                dateSoin.setText(soin.getDateSoin());
-
-                // Ajout des TextView au TableRow avec les paramètres de poids
-                rowCare.addView(nomSoin, headerParams);
-                rowCare.addView(doseSoin, headerParams);
-                rowCare.addView(dateSoin, headerParams);
+                // Ajout des en-têtes de colonnes au TableRow
+                headerRow.addView(headerNom, headerParams);
+                headerRow.addView(headerDose, headerParams);
+                headerRow.addView(headerDate, headerParams);
 
                 // Ajout du TableRow au TableLayout
-                tableLayoutCare.addView(rowCare, rowParamsCare);
+                tableLayoutCare.addView(headerRow);
+
+                // Parcourir la liste des soins pour ajouter les données au tableau
+                for (Soins soin : listCare) {
+                    TableRow rowCare = new TableRow(requireContext());
+                    TableRow.LayoutParams rowParamsCare = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+
+                    // Création des TextView pour les données du soin
+                    TextView nomSoin = new TextView(requireContext());
+                    TextView doseSoin = new TextView(requireContext());
+                    TextView dateSoin = new TextView(requireContext());
+
+                    // Définition des données du vaccin
+                    nomSoin.setText(soin.getNomSoin());
+                    doseSoin.setText(soin.getDose());
+                    dateSoin.setText(soin.getDateSoin());
+
+                    // Ajout des TextView au TableRow avec les paramètres de poids
+                    rowCare.addView(nomSoin, headerParams);
+                    rowCare.addView(doseSoin, headerParams);
+                    rowCare.addView(dateSoin, headerParams);
+
+                    // Ajout du TableRow au TableLayout
+                    tableLayoutCare.addView(rowCare, rowParamsCare);
+                }
+
+                // Ajout du TableLayout à votre conteneur de soins
+                careContainer.addView(tableLayoutCare);
             }
 
-            // Ajout du TableLayout à votre conteneur de soins
-            careContainer.addView(tableLayoutCare);
+
+
+            Log.d("DetailsAnimalEnTransportFragment", "num_elevage: " + num_elevage);
         }
 
 
-        Button buttonAddVaccines = rootView.findViewById(R.id.buttonAddVaccines);
-        buttonAddVaccines.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Créer une instance du FormulaireVaccinsFragment
-                FormulaireVaccinsFragment formulaireVaccinsFragment = new FormulaireVaccinsFragment();
-
-                // Envoyer les données de l'animal au FormulaireVaccinsFragment
-                Bundle args = new Bundle();
-                args.putSerializable("animal", selectedAnimal);
-                formulaireVaccinsFragment.setArguments(args);
-
-                // Replacer le layout par FormulaireVaccinsFragment
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.container, formulaireVaccinsFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
 
 
-        Button buttonAddCare = rootView.findViewById(R.id.buttonAddCare);
-        buttonAddCare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Créer une instance du FormulaireSoinsFragment
-                FormulaireSoinsFragment formulaireSoinsFragment = new FormulaireSoinsFragment();
-
-                // Envoyer les données de l'animal au FormulaireSoinsFragment
-                Bundle args = new Bundle();
-                args.putSerializable("animal", selectedAnimal);
-                formulaireSoinsFragment.setArguments(args);
-
-                // Replacer le layout par FormulaireSoinsFragment
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.container, formulaireSoinsFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-
-        // Set onClickListener for buttonQRCode
+        // Set onClickListener pour buttonQRCode
         Button buttonQRCode = rootView.findViewById(R.id.buttonQRCode);
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,23 +313,58 @@ public class DetailsAnimalFragment extends Fragment {
             }
         });
 
-
+        // Set onClickListener pour buttonGeneratePDF
         Button buttonGeneratePDF = rootView.findViewById(R.id.buttonTelecharger);
         buttonGeneratePDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 generatePDF();
             }
         });
+
+
+        // Set onClickListener pour buttonAjouterListeTransport
+        Button buttonAjouterListeTransport = rootView.findViewById(R.id.buttonAjouterListeTransport);
+        buttonAjouterListeTransport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Récupérer le numéro national de selectedAnimal
+                String numNatSelectedAnimal = selectedAnimal.getNumNat();
+
+                // Vérifier si le numéro national est déjà présent dans la liste
+                boolean animalDejaPresent = false;
+                for (Animal animal : animaux_en_transport) {
+                    if (animal.getNumNat().equals(numNatSelectedAnimal)) {
+                        animalDejaPresent = true;
+                        break;
+                    }
+                }
+
+                if (!animalDejaPresent) {
+                    // Ajouter l'animal à la liste
+                    animaux_en_transport.add(selectedAnimal);
+                    Toast.makeText(getContext(), "Animal ajouté à la liste de transport", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Cet animal est déjà dans la liste de transport", Toast.LENGTH_SHORT).show();
+                }
+
+                ConnexionTransporteurFragment connexionTransporteurFragment = new ConnexionTransporteurFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, connexionTransporteurFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
 
         return rootView;
     }
 
 
 
-
-
-
+    // Générer un PDF avec les informations de l'animal
     private void generatePDF() {
         // Vérifier si la permission WRITE_EXTERNAL_STORAGE est accordée
         if (ContextCompat.checkSelfPermission(requireActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -385,6 +391,7 @@ public class DetailsAnimalFragment extends Fragment {
         }
     }
 
+    // Créer un document PDF avec les informations de l'animal
     private void createPDF() {
         // Créer un nouveau document PDF
         PdfDocument document = new PdfDocument();
@@ -413,17 +420,17 @@ public class DetailsAnimalFragment extends Fragment {
         String numNatMere = selectedAnimal.getNumNatMere() != null ? selectedAnimal.getNumNatMere() : "non connue";
         String codPaysMere = selectedAnimal.getCodPaysMere() != null ? selectedAnimal.getCodPaysMere() : "non connu";
         String codRaceMere = selectedAnimal.getCodRaceMere() != null ? selectedAnimal.getCodRaceMere() : "non connue";
+        String numElevage = num_elevage;
 
         String soins = formatSoinsList(db.getCareByNumNat(numNat));
         String vaccins = formatVaccinsList(db.getVaccinesByNumNat(numNat));
-
 
 
         // Définir la taille de la police pour les titres et le texte
         paint.setTextSize(14); // Taille de police pour les titres
         float lineHeight = 18; // Hauteur de ligne pour les sauts de ligne
         float textSize = 12; // Taille de police pour le texte
-        String attestation = MainActivity.asda;
+
 
         // Dessiner toutes les informations de l'animal sur le canevas
         // Première section rose
@@ -493,10 +500,6 @@ public class DetailsAnimalFragment extends Fragment {
         y += lineHeight;
 
 
-        // Zone blanche entre les deux sections
-        paint.setColor(Color.WHITE); // Couleur de fond blanc
-        canvas.drawRect(0, y, canvas.getWidth(), y + 50, paint);
-
         // Ajouter une nouvelle section pour les vaccins avec fond vert
         paint.setColor(ContextCompat.getColor(requireContext(), R.color.green)); // Vert
         canvas.drawRect(0, y, canvas.getWidth(), y + 75, paint); // Dessiner un rectangle vert pour la section
@@ -520,19 +523,17 @@ public class DetailsAnimalFragment extends Fragment {
         canvas.drawText("Soins: " + soins, x, y, paint); // Afficher les informations sur les soins
         y += lineHeight; // Espacement entre chaque ligne
         canvas.drawText("Vaccins: " + vaccins, x, y, paint); // Afficher les informations sur les vaccins
-        y += 20;
+        y += 20; // Espacement entre chaque ligne
+
 
         // Ajouter une nouvelle section pour l'attestation sanitaire
         paint.setColor(Color.WHITE); // Fond blanc
-        canvas.drawRect(0, y, canvas.getWidth(), y + 100, paint); // Dessiner un rectangle blanc
+        canvas.drawRect(0, y, canvas.getWidth(), y + 50, paint); // Dessiner un rectangle blanc
 
         paint.setColor(Color.BLACK); // Texte noir
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Texte en gras
         paint.setTextSize(14); // Taille de police pour le titre de la section
         y += lineHeight; // Espacement entre la section précédente et le titre
-
-
-        canvas.drawText(attestation, x, y, paint); // Ajouter un titre pour l'attestation sanitaire
 
 
         // Récupérer toutes les informations de l'animal
@@ -573,7 +574,6 @@ public class DetailsAnimalFragment extends Fragment {
         document.close();
     }
 
-
     // Méthode pour formater la liste des soins avec les mots devant chaque champ
     private String formatSoinsList(List<Soins> soinsList) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -595,7 +595,6 @@ public class DetailsAnimalFragment extends Fragment {
         }
         return stringBuilder.toString();
     }
-
 
 }
 

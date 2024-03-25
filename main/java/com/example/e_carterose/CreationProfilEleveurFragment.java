@@ -63,11 +63,13 @@ public class CreationProfilEleveurFragment extends Fragment {
                 String nomElevage = editTextNomElevage.getText().toString();
                 String motDePasse = editTextMotDePasse.getText().toString();
 
+                String dateModif = databaseAccess.getCurrentDateTime();
+
                 if (databaseAccess.isElevageExists(numeroElevage)) {
                     Toast.makeText(getContext(), "Un compte existe déjà pour ce numéro d'élevage", Toast.LENGTH_SHORT).show();
                 } else {
                     // Appel de la méthode createElevageProfile pour créer un nouveau profil d'élevage
-                    long result = databaseAccess.createElevageProfile(numeroElevage, nomElevage, motDePasse);
+                    long result = databaseAccess.createElevageProfile(numeroElevage, nomElevage, motDePasse, dateModif, "1");
 
                     if (result != -1) {
                         Toast.makeText(getContext(), "Profil créé avec succès", Toast.LENGTH_SHORT).show();

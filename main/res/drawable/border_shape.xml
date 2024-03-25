@@ -2,7 +2,7 @@
     android:shape="rectangle">
     <stroke
         android:width="2dp"
-        android:color="#FF000000" /> <!-- Couleur noir de la bordure -->
+        android:color="#000000" /> <!-- Couleur de la bordure -->
     <padding
         android:top="2dp"
         android:right="2dp"

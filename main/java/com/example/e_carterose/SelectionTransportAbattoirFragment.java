@@ -3,15 +3,15 @@ package com.example.e_carterose;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
@@ -19,20 +19,18 @@ import java.util.List;
 public class SelectionTransportAbattoirFragment extends Fragment {
 
     private DatabaseAccess db;
-    private List<Animal> acctiveAnimals; // Variable pour stocker la liste complète des animaux actifs
-    private List<Animal> ElevageTransfert; // Variable pour stocker la liste des animaux en transfert entre élevages
-    private List<Animal> SlaughterhouseTransfer; // Variable pour stocker la liste des animaux en transfert vers l'abattoir
-    private List<Animal> DeadNotifiedAnimals; // Variable pour stocker la liste des animaux notifiés morts
-    private List<Animal> DeadAnimals; // Variable pour stocker la liste des animaux morts
+    private List<Animal> allAnimals; // Variable pour stocker la liste complète des animaux
+
     private EditText editTextNumTra;
+    private RadioGroup radioGroupTransfert;
     private Button buttonSubmit;
     private Button buttonEffacer;
-
 
     public static SelectionTransportAbattoirFragment newInstance() {
         SelectionTransportAbattoirFragment fragment = new SelectionTransportAbattoirFragment();
         return fragment;
     }
+
 
 
     @Override
@@ -46,11 +44,12 @@ public class SelectionTransportAbattoirFragment extends Fragment {
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
 
-        // Récupérer tous les animaux actif (=1) de l'élevage
-        acctiveAnimals = db.getAnimalsByElevageAndActif(numElevage, 1);
+        // Récupérer tous les animaux de l'élevage de départ
+        allAnimals = db.getAnimalsByElevage(numElevage);
 
         // Références des vues
         editTextNumTra = rootView.findViewById(R.id.editTextNumTra);
+        radioGroupTransfert = rootView.findViewById(R.id.radioGroupTransfert);
         buttonSubmit = rootView.findViewById(R.id.buttonSubmit);
         buttonEffacer = rootView.findViewById(R.id.buttonEffacer);
 
@@ -62,61 +61,20 @@ public class SelectionTransportAbattoirFragment extends Fragment {
                 // Récupération du numéro de travail entré par l'utilisateur
                 String numTra = editTextNumTra.getText().toString();
 
-                // Vérification si le champs numTra n'est pas vide
-                if (numTra.isEmpty()) {
-                    Toast.makeText(getContext(), "Veuillez entrer un numéro de travail", Toast.LENGTH_SHORT).show();
-                    return; // Arrêter l'exécution de la méthode
-                }
-                // Vérifier que le nombre de chiffres entré dans les champs du formulaire correspond à la longueur maximale spécifiée dans le layout
-                if (numTra.length() != 4) {
-                    // Afficher un message d'erreur
-                    Toast.makeText(requireContext(), "Le numéro de travail doit contenir exactement " + 4 + " chiffres.", Toast.LENGTH_SHORT).show();
-                    return; // Arrêter l'exécution de la méthode
-                }
-
-                // Vérifier si l'animal est déjà déclaré en cours de transfert vers un autre élevage
-                ElevageTransfert = db.getAnimalsByElevageAndActif(numElevage, 2);
-                for (Animal animal : ElevageTransfert) {
-                    if (animal.getNumTra().equals(numTra)) {
-                        Toast.makeText(getContext(), "L'animal " + numTra + " est déjà en cours de transfert vers un autre élevage.", Toast.LENGTH_SHORT).show();
-                        return; // Arrêter l'exécution de la méthode
-                    }
-                }
-
-                // Vérifier si l'animal est déjà déclaré en cours de transfert vers l'abattoir (actif=3)
-                SlaughterhouseTransfer = db.getAnimalsByElevageAndActif(numElevage, 3);
-                for (Animal animal : SlaughterhouseTransfer) {
-                    if (animal.getNumTra().equals(numTra)) {
-                        Toast.makeText(getContext(), "L'animal " + numTra + " est déjà en cours de transfert vers l'abattoir.", Toast.LENGTH_SHORT).show();
-                        return; // Arrêter l'exécution de la méthode
-                    }
-                }
-
-                // Vérifier si l'animal est déjà notifié mort (actif=-1)
-                DeadNotifiedAnimals = db.getAnimalsByElevageAndActif(numElevage, -1);
-                for (Animal animal : DeadNotifiedAnimals) {
-                    if (animal.getNumTra().equals(numTra)) {
-                        Toast.makeText(getContext(), "L'animal " + numTra + " est déjà notifié mort.", Toast.LENGTH_SHORT).show();
-                        return; // Arrêter l'exécution de la méthode
-                    }
-                }
-
-                // Vérifier si l'animal est déjà notifié mort (actif=0)
-                DeadAnimals = db.getAnimalsByElevageAndActif(numElevage, 0);
-                for (Animal animal : DeadAnimals) {
-                    if (animal.getNumTra().equals(numTra)) {
-                        Toast.makeText(getContext(), "L'animal " + numTra + " est déjà mort.", Toast.LENGTH_SHORT).show();
-                        return; // Arrêter l'exécution de la méthode
-                    }
-                }
 
                 // Vérifier si l'animal avec le numéro de travail donné existe dans l'élevage
-                if (!db.isNumTraExists(numTra, acctiveAnimals)) {
+                if (!db.isNumTraExists(numTra, allAnimals)) {
                     Toast.makeText(getContext(), "L'animal " + numTra + " n'existe pas dans votre élevage.", Toast.LENGTH_SHORT).show();
                     return; // Arrêter l'exécution de la méthode
                 }
 
 
+                // Vérifier si un RadioButton est sélectionné dans le RadioGroup
+                if (radioGroupTransfert.getCheckedRadioButtonId() == -1) {
+                    // Aucun RadioButton n'est sélectionné
+                    Toast.makeText(requireContext(), "Veuillez sélectionner un mode de transfert.", Toast.LENGTH_SHORT).show();
+                    return; // Arrêter l'exécution de la méthode
+                }
 
                 // Si tous les champs entrés sont corrects, afficher une boîte de dialogue de confirmation
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -126,9 +84,6 @@ public class SelectionTransportAbattoirFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // Modifier le statut de l'animal (3 = transfert vers l'abattoir)
                         db.updateStatus(numElevage, numTra, 3);
-
-                        // Afficher un message de confirmation
-                        Toast.makeText(requireContext(), "L'animal " + numTra + " est en attente de transfert à l'abattoir.", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -140,19 +95,20 @@ public class SelectionTransportAbattoirFragment extends Fragment {
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
-            });
+        });
 
-            // Gestion du clic sur le bouton Effacer
-            buttonEffacer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Effacer les champs de texte et désélectionner les cases à cocher
-                    editTextNumTra.setText("");
+        // Gestion du clic sur le bouton Effacer
+        buttonEffacer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Effacer les champs de texte et désélectionner les cases à cocher
+                editTextNumTra.setText("");
+                radioGroupTransfert.clearCheck();
 
-                }
-            });
+            }
+        });
 
         return rootView;
-        }
+    }
 
 }

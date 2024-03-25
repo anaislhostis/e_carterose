@@ -1,9 +1,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@android:color/transparent" />
+    <solid android:color="@android:color/transparent" /> <!-- Couleur de fond -->
     <stroke
         android:width="2dp"
-        android:color="#FF000000" /> <!-- Couleur noir de la bordure -->
+        android:color="#000000" /> <!-- Couleur de la bordure -->
     <padding
         android:top="2dp"
         android:right="2dp"

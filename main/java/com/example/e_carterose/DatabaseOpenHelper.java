@@ -6,17 +6,16 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 public class DatabaseOpenHelper extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "bdd_ede_v15.db";
+    public static final String DATABASE_NAME = "bdd_ede_v13.db";
     private static final int DATABASE_VERSION = 1;
     private final Context context;
 
     public DatabaseOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
-        this.context = null;
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     public Context getContext() {
         return context;
     }
-
 }

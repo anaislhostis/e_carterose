@@ -3,9 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#ED358E</color>
-    <color name="rose_pale">#F180A6</color>
+    <color name="rose_pale">#FC81AA</color>
     <color name="blue">#96B8FA</color>
     <color name="green">#70B85C</color>
+    <color name="genetique">#A2A4AA</color>
     <color name="grey">#808080</color>
     <color name="ligth_beige">#F8E7AE</color>
     <color name ="link_blue">#02308A</color>

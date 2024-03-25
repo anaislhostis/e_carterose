@@ -1,7 +1,9 @@
 package com.example.e_carterose;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private List<String> numTraAnimauxMorts;
     private List<String> numNatAnimauxTransfert;
 
-    @Override
+    public static List<Animal> animaux_en_transport = new ArrayList<>();;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -21,10 +24,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new IndexFragment())
                 .commit();
-
-
     }
-
 
 
 }

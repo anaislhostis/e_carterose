@@ -138,7 +138,9 @@ public class Animal implements Serializable {
         return num_elevage;
     }
 
-    public void setNumElevage(String num_elevage) { this.num_elevage = num_elevage; }
+    public void setNumElevage(String num_nat) {
+        this.num_elevage = num_elevage;
+    }
 
     public String getRace() {
         return cod_race;

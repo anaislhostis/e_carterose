@@ -9,30 +9,56 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.e_carterose.databinding.FragmentConnexionEleveurBinding;
+import com.example.e_carterose.databinding.FragmentConnexionTransporteurBinding;
+
 
 public class ConnexionTransporteurFragment extends Fragment {
 
-    private FragmentConnexionEleveurBinding binding;
+    private FragmentConnexionTransporteurBinding binding;
 
-    public static ConnexionEleveurFragment newInstance() {
-        ConnexionEleveurFragment fragment = new ConnexionEleveurFragment();
+    public static ConnexionTransporteurFragment newInstance() {
+        ConnexionTransporteurFragment fragment = new ConnexionTransporteurFragment();
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentConnexionEleveurBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentConnexionTransporteurBinding.inflate(inflater, container, false);
+        View rootView = binding.getRoot();
+        // Inflate the layout for this fragment
+        return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-    }}
+
+        binding.ButtonScannerCarteRose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScanQrCodeTransportFragment scanQrCodeTransportFragment = ScanQrCodeTransportFragment.newInstance();
+
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, scanQrCodeTransportFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+
+        binding.ButtonVisualiserAnimauxTransport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AnimauxEnTransportFragment animauxEnTransportFragment = AnimauxEnTransportFragment.newInstance();
+
+                // Remplacer le fragment actuel par le fragment des animaux en transport
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, animauxEnTransportFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+}

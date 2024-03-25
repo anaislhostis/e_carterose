@@ -71,13 +71,13 @@
             android:textSize="15dp"/>
 
         <LinearLayout
-            android:id="@+id/animals_container"
-            style = "@style/AnimalContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:orientation="vertical">
-        </LinearLayout>
+        android:id="@+id/animals_container"
+        style = "@style/AnimalContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:orientation="vertical">
+    </LinearLayout>
 
     </LinearLayout>
 

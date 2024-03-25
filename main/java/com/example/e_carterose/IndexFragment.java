@@ -55,6 +55,34 @@ public class IndexFragment extends Fragment {
             }
         });
 
+        binding.ButtonTransporteurEquarisseur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer une instance de ConnexionTransporteurFragment
+                ConnexionTransporteurFragment connexionTransporteurFragment = ConnexionTransporteurFragment.newInstance();
+
+                // Remplacer le fragment actuel par le fragment ConnexionTransporteurFragment
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, connexionTransporteurFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        binding.ButtonVeterinaire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer une instance de ConnexionVeterinaireFragment
+                ConnexionVeterinaireFragment connexionVeterinaireFragment = ConnexionVeterinaireFragment.newInstance();
+
+                // Remplacer le fragment actuel par le fragment ConnexionVeterinaireFragment
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.container, connexionVeterinaireFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
     }
 
 

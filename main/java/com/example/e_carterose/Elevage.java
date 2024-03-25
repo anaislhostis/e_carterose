@@ -4,7 +4,9 @@ public class Elevage {
     private String num_elevage;
     private String nom_elevage;
     private String mdp;
-    private String codAsda;
+    private String cod_asda;
+    private String date_modif;
+    private String actif;
 
     public String getNom_elevage() {
         return nom_elevage;
@@ -31,11 +33,26 @@ public class Elevage {
     }
 
     public String getCod_asda() {
-        return codAsda;
+        return cod_asda;
     }
 
-    public void setCod_asda(String codAsda) {
-        this.codAsda = codAsda;
+    public void setCod_asda(String cod_asda) {
+        this.cod_asda = cod_asda;
     }
 
+    public String getActif() {
+        return actif;
+    }
+
+    public void setActif(String actif) {
+        this.actif = actif;
+    }
+
+    public String getDate_modif() {
+        return date_modif;
+    }
+
+    public void setDate_modif(String date_modif) {
+        this.date_modif = date_modif;
+    }
 }

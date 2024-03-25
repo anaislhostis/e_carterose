@@ -39,6 +39,7 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        Log.e("FragmentLifecycle", "onCreateView called");
 
         View rootView = inflater.inflate(R.layout.fragment_visualisation_animaux_morts, container, false); // Initialiser la vue
         layout = rootView.findViewById(R.id.dead_animals_container); // Récupérer le layout pour afficher les animaux
@@ -48,8 +49,8 @@ public class VisualisationAnimauxMortsFragment extends Fragment {
         // Récupérer le numéro de l'élevage depuis la variable statique
         String numElevage = MainActivity.numeroElevage;
 
-        // Récupérer tous les animaux de l'élevage notifié morts (actif=-1)
-        DeadNotifiedAnimals = db.getAnimalsByElevageAndActif(numElevage, -1);
+        // Récupérer tous les animaux de l'élevage notifié morts (actif = -1)
+        DeadNotifiedAnimals = db.getDeadNotifiedAnimalsByElevage(numElevage);
         Log.e("DeadNotifiedAnimals : ", DeadNotifiedAnimals.toString());
 
         // Mise à jour de l'affichage des animaux notifés morts

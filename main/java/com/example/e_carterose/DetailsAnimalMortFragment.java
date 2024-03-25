@@ -1,6 +1,6 @@
 package com.example.e_carterose;
 
-import static com.example.e_carterose.FragmentQRCode.generateQRContent;
+import static com.example.e_carterose.QRCodeFragment.generateQRContent;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -13,14 +13,10 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
@@ -41,10 +37,6 @@ public class DetailsAnimalMortFragment extends Fragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private Animal selectedAnimal;
     private DatabaseAccess db;
-    private List<Vaccins> listVaccines; // Liste contenant tous les vaccins de la table
-    private List<Soins> listCare; // Liste contenant tous les soins de la table
-    private LinearLayout vaccinesContainer; //Layout pour afficher les vaccins dans un layout
-    private LinearLayout careContainer; //Layout pour afficher les soins dans un layout
 
 
     @Override
@@ -118,163 +110,6 @@ public class DetailsAnimalMortFragment extends Fragment {
             textViewNumNatMere.setVisibility(View.GONE);
         }
 
-        // Récupérer le numNat de l'animal
-        String numNat = selectedAnimal.getNumNat();
-
-        // Récupérer la liste des vaccins qui concerne l'animal
-        listVaccines = db.getVaccinesByNumNat(numNat);
-
-        // Récupérer une référence au layout pour afficher les vaccins
-        vaccinesContainer = rootView.findViewById(R.id.animals_vaccines_container);
-
-        // Vérifier si la liste des vaccins est vide
-        if (listVaccines.isEmpty()) {
-            // La liste des vaccins est vide
-            TextView textViewNoVaccines = new TextView(requireContext());
-            textViewNoVaccines.setText(Html.fromHtml("<i>Pas de vaccins recensés pour cet animal</i>"));
-            textViewNoVaccines.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            vaccinesContainer.addView(textViewNoVaccines);
-
-        } else {
-            // Créer un TableLayout
-            TableLayout tableLayoutVaccines = new TableLayout(requireContext());
-
-            // Créer un TableRow pour les en-têtes
-            TableRow headerRow = new TableRow(requireContext());
-            TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
-            headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-            // Créer des TextView pour les en-têtes de colonnes
-            TextView headerNom = new TextView(requireContext());
-            TextView headerDose = new TextView(requireContext());
-            TextView headerDate = new TextView(requireContext());
-
-
-
-            // Définir les en-têtes des colonnes en gras
-            headerNom.setTypeface(null, Typeface.BOLD);
-            headerNom.setText("Nom");
-            headerDose.setTypeface(null, Typeface.BOLD);
-            headerDose.setText("Dose (g)");
-            headerDate.setTypeface(null, Typeface.BOLD);
-            headerDate.setText("Date");
-
-            // Ajout des en-têtes de colonnes au TableRow
-            headerRow.addView(headerNom, headerParams);
-            headerRow.addView(headerDose, headerParams);
-            headerRow.addView(headerDate, headerParams);
-
-            // Ajout du TableRow au TableLayout
-            tableLayoutVaccines.addView(headerRow);
-
-
-            // Parcourir la liste des vaccins pour ajouter les données au tableau
-            for (Vaccins vaccin : listVaccines) {
-                TableRow rowVaccine = new TableRow(requireContext());
-                TableRow.LayoutParams rowParamsVaccine = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-
-                // Création des TextView pour les données du vaccin
-                TextView nomVaccin = new TextView(requireContext());
-                TextView doseVaccin = new TextView(requireContext());
-                TextView dateVaccin = new TextView(requireContext());
-
-                // Définition des données du vaccin
-                nomVaccin.setText(vaccin.getNomVaccin());
-                doseVaccin.setText(vaccin.getDose());
-                dateVaccin.setText(vaccin.getDateVaccin());
-
-                // Ajout des TextView au TableRow avec les paramètres de poids
-                rowVaccine.addView(nomVaccin, headerParams);
-                rowVaccine.addView(doseVaccin, headerParams);
-                rowVaccine.addView(dateVaccin, headerParams);
-
-                // Ajout du TableRow au TableLayout
-                tableLayoutVaccines.addView(rowVaccine, rowParamsVaccine);
-            }
-
-            // Ajout du TableLayout à votre conteneur de vaccins
-            vaccinesContainer.addView(tableLayoutVaccines);
-        }
-
-        // Récupérer la liste des soins qui concerne l'animal
-        listCare = db.getCareByNumNat(numNat);
-
-        // Récupérer une référence au layout pour afficher les vaccins
-        careContainer = rootView.findViewById(R.id.animals_care_container);
-
-        // Vérifier si la liste des vaccins est vide
-        if (listCare.isEmpty()) {
-            // La liste des vaccins est vide
-            TextView textViewNoCare = new TextView(requireContext());
-            textViewNoCare.setText(Html.fromHtml("<i>Pas de soins recensés pour cet animal</i>"));
-            textViewNoCare.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            careContainer.addView(textViewNoCare);
-
-        } else {
-            // Créer un TableLayout
-            TableLayout tableLayoutCare = new TableLayout(requireContext());
-
-            // Créer un TableRow pour les en-têtes
-            TableRow headerRow = new TableRow(requireContext());
-            TableRow.LayoutParams headerParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
-            headerRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-            // Créer des TextView pour les en-têtes de colonnes
-            TextView headerNom = new TextView(requireContext());
-            TextView headerDose = new TextView(requireContext());
-            TextView headerDate = new TextView(requireContext());
-
-            // Définir les en-têtes des colonnes en gras
-            headerNom.setTypeface(null, Typeface.BOLD);
-            headerNom.setText("Nom");
-            headerDose.setTypeface(null, Typeface.BOLD);
-            headerDose.setText("Dose (g)");
-            headerDate.setTypeface(null, Typeface.BOLD);
-            headerDate.setText("Date");
-
-            // Ajout des en-têtes de colonnes au TableRow
-            headerRow.addView(headerNom, headerParams);
-            headerRow.addView(headerDose, headerParams);
-            headerRow.addView(headerDate, headerParams);
-
-            // Ajout du TableRow au TableLayout
-            tableLayoutCare.addView(headerRow);
-
-            // Parcourir la liste des soins pour ajouter les données au tableau
-            for (Soins soin : listCare) {
-                TableRow rowCare = new TableRow(requireContext());
-                TableRow.LayoutParams rowParamsCare = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-
-                // Création des TextView pour les données du soin
-                TextView nomSoin = new TextView(requireContext());
-                TextView doseSoin = new TextView(requireContext());
-                TextView dateSoin = new TextView(requireContext());
-
-                // Définition des données du vaccin
-                nomSoin.setText(soin.getNomSoin());
-                doseSoin.setText(soin.getDose());
-                dateSoin.setText(soin.getDateSoin());
-
-                // Ajout des TextView au TableRow avec les paramètres de poids
-                rowCare.addView(nomSoin, headerParams);
-                rowCare.addView(doseSoin, headerParams);
-                rowCare.addView(dateSoin, headerParams);
-
-                // Ajout du TableRow au TableLayout
-                tableLayoutCare.addView(rowCare, rowParamsCare);
-            }
-
-            // Ajout du TableLayout à votre conteneur de soins
-            careContainer.addView(tableLayoutCare);
-        }
-
-
         // Set onClickListener for buttonQRCode
         Button buttonQRCode = rootView.findViewById(R.id.buttonQRCode);
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +117,7 @@ public class DetailsAnimalMortFragment extends Fragment {
             public void onClick(View v) {
                 // Replace current layout with QR code layout
 
-                FragmentQRCode fragment_qr_code = new FragmentQRCode();
+                QRCodeFragment fragment_qr_code = new QRCodeFragment();
 
                 // Pass animal data to QR code fragment
                 Bundle args = new Bundle();
@@ -362,6 +197,7 @@ public class DetailsAnimalMortFragment extends Fragment {
         // Récupérer toutes les informations de l'animal
         String codPays = selectedAnimal.getCodPays();
         String numNat = selectedAnimal.getNumNat();
+        String numExp = selectedAnimal.getNumExpNaiss();
         String nom = selectedAnimal.getNom();
         String race = selectedAnimal.getRace();
         String dateNaiss = selectedAnimal.getDateNaiss() != null && selectedAnimal.getDateNaiss().length() >= 10 ? selectedAnimal.getDateNaiss().substring(0, 10) : "non attribué";
@@ -375,93 +211,139 @@ public class DetailsAnimalMortFragment extends Fragment {
         String numNatMere = selectedAnimal.getNumNatMere() != null ? selectedAnimal.getNumNatMere() : "non connue";
         String codPaysMere = selectedAnimal.getCodPaysMere() != null ? selectedAnimal.getCodPaysMere() : "non connu";
         String codRaceMere = selectedAnimal.getCodRaceMere() != null ? selectedAnimal.getCodRaceMere() : "non connue";
+        String numElevage = selectedAnimal.getNumElevage();
+
+
+
+        // Définir la taille de la police pour les titres et le texte
+        paint.setTextSize(14); // Taille de police pour les titres
+        float lineHeight = 18; // Hauteur de ligne pour les sauts de ligne
+        float textSize = 12; // Taille de police pour le texte
 
 
         // Dessiner toutes les informations de l'animal sur le canevas
         // Première section rose
         paint.setColor(ContextCompat.getColor(requireContext(), R.color.rose_pale)); // Rose
-        canvas.drawRect(0, y - 20, canvas.getWidth(), y + 250, paint);
+        canvas.drawRect(0, y - 15, canvas.getWidth(), y + 230, paint); // Ajuster la taille de la section
 
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Mettre en gras
-        paint.setTextSize(24);
         paint.setColor(Color.BLACK); // Changer la couleur du texte en noir
-        y += 25; // Espacement entre le haut de la page et le titre de la section rose
+        y += lineHeight; // Espacement entre le haut de la page et le titre de la section rose
 
         canvas.drawText("Informations générales", x, y, paint); // Ajouter un titre à la section rose
 
         paint.setTypeface(Typeface.DEFAULT); // Réinitialiser la police à la police par défaut
-        paint.setTextSize(18); // Taille de police régulière pour le contenu
-        paint.setColor(Color.BLACK); // Changer la couleur du texte en noir
+        paint.setTextSize(textSize); // Taille de police régulière pour le contenu
 
-        y += 35; // Espacement entre le titre et le contenu
+        y += lineHeight; // Espacement entre le titre et le contenu
 
         canvas.drawText("Numéro de travail: " + numTra, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Numéro national: " + numNat, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Nom de l'animal: " + nom, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race: " + race, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Date de naissance: " + dateNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays de naissance: " + codPaysNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Numéro d'exploitation de naissance: " + expNaiss, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Sexe: " + sexe, x, y, paint);
-        y += 25;
-
-
+        y += lineHeight;
 
         // Zone blanche entre les deux sections
         paint.setColor(Color.WHITE); // Couleur de fond blanc
         canvas.drawRect(0, y, canvas.getWidth(), y + 50, paint);
 
-
         // Deuxième section bleue
-        paint.setColor(ContextCompat.getColor(requireContext(), R.color.blue)); // Bleu clair pour le fond de la section
-        canvas.drawRect(0, y, canvas.getWidth(), y + 225, paint);
-        y += 25; // Espacement entre la zone blanche et le titre de la section bleue
+        paint.setColor(ContextCompat.getColor(requireContext(), R.color.blue)); // Bleu
+
+        canvas.drawRect(0, y, canvas.getWidth(), y + 175, paint);
+        y += lineHeight; // Espacement entre la zone blanche et le titre de la section bleue
 
         // Titre de la deuxième section en gras
         paint.setColor(Color.BLACK); // Couleur de texte noire pour le titre
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Mettre en gras
-        paint.setTextSize(24);
         canvas.drawText("Génétique", x, y, paint); // Ajouter un titre à la section bleue
-
 
         // Réinitialiser la police pour le contenu
         paint.setTypeface(Typeface.DEFAULT); // Réinitialiser la police à la police par défaut
-        paint.setTextSize(18); // Taille de police régulière pour le contenu
+        paint.setTextSize(textSize); // Taille de police régulière pour le contenu
 
-        y += 35; // Espacement entre le titre et le contenu
+        y += lineHeight; // Espacement entre le titre et le contenu
         paint.setColor(Color.BLACK);
         canvas.drawText("Numéro national du père: " + numNatPere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays du père: " + codPaysPere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race du père: " + codRacePere, x, y, paint);
-        y += 45;
+        y += lineHeight * 2; // Espacement plus grand après la race du père
         canvas.drawText("Numéro national de la mère: " + numNatMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Code du pays de la mère: " + codPaysMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
         canvas.drawText("Race de la mère: " + codRaceMere, x, y, paint);
-        y += 25;
+        y += lineHeight;
 
 
+        String soins = formatSoinsList(db.getCareByNumNat(numNat));
+        String vaccins = formatVaccinsList(db.getVaccinesByNumNat(numNat));
+
+        // Calculer la hauteur totale nécessaire pour afficher les informations sur les soins et les vaccins
+        int totalHeight = (int) ((soins.split("\n").length + vaccins.split("\n").length + 3) * lineHeight); // 3 lignes supplémentaires pour l'en-tête "Soins", "Vaccins", et un espace
+
+        // Ajouter une nouvelle section pour les soins et les vaccins avec fond vert
+        paint.setColor(ContextCompat.getColor(requireContext(), R.color.green)); // Vert
+        canvas.drawRect(0, y, canvas.getWidth(), y + totalHeight, paint); // Dessiner un rectangle vert avec une hauteur suffisante pour les informations sur les soins et les vaccins
+
+        // Titre de la section des vaccins
+        paint.setColor(Color.BLACK); // Texte en noir
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Texte en gras
+        paint.setTextSize(14); // Taille de police pour le titre de la section
+        y += lineHeight; // Espacement entre la section précédente et le titre
+        canvas.drawText("Soins et Vaccins", x, y, paint); // Ajouter un titre pour la section des soins et des vaccins
+        y+= lineHeight; // Espacement entre le titre et le contenu
+
+        // Réinitialiser la police pour le contenu
+        paint.setTypeface(Typeface.DEFAULT); // Réinitialiser la police à la police par défaut
+        paint.setTextSize(textSize); // Taille de police régulière pour le contenu
+
+        // Dessiner les informations sur les soins
+        String[] soinsLines = soins.split("\n"); // Diviser les informations sur les soins en lignes
+        canvas.drawText("Soins: ", x, y, paint); // Afficher chaque ligne des informations sur les soins
+        y += lineHeight; // Espacement entre chaque ligne
+        for (String line : soinsLines) {
+            canvas.drawText(line, x, y, paint); // Afficher chaque ligne des informations sur les soins
+            y += lineHeight; // Espacement entre chaque ligne
+        }
+
+    // Dessiner les informations sur les vaccins
+        String[] vaccinsLines = vaccins.split("\n"); // Diviser les informations sur les vaccins en lignes
+        canvas.drawText("Vaccins: ", x, y, paint); // Afficher chaque ligne des informations sur les vaccins
+        y += lineHeight; // Espacement entre chaque ligne
+        for (String line : vaccinsLines) {
+            canvas.drawText(line, x, y, paint); // Afficher chaque ligne des informations sur les vaccins
+            y += lineHeight; // Espacement entre chaque ligne
+        }
+
+
+        paint.setColor(Color.BLACK); // Texte noir
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Texte en gras
+        paint.setTextSize(14); // Taille de police pour le titre de la section
+        y += lineHeight*2;
 
 
         // Récupérer toutes les informations de l'animal
-        String animalInfo = generateQRContent(selectedAnimal);
-        FragmentQRCode fragmentQRCode = new FragmentQRCode();
-        Bitmap qrCodeBitmap = fragmentQRCode.generateQRCodeBitmap(animalInfo, requireContext(), 300, 300);
+        String animalInfo = generateQRContent(selectedAnimal, getContext());
+        QRCodeFragment fragmentQRCode = new QRCodeFragment();
+        Bitmap qrCodeBitmap = fragmentQRCode.generateQRCodeBitmap(animalInfo, requireContext(), 200, 200);
 
         // Si le bitmap du QR code est disponible, dessinez-le sur le canevas
         if (qrCodeBitmap != null) {
             // Calculer la position y pour afficher le QR code en dessous des autres informations
-            y += 20; // Vous pouvez ajuster cette valeur selon vos besoins
 
             // Dessiner le QR code sur le canevas du PDF
             canvas.drawBitmap(qrCodeBitmap, x, y, paint);
@@ -491,6 +373,29 @@ public class DetailsAnimalMortFragment extends Fragment {
         document.close();
     }
 
+    // Méthode pour formater la liste des soins avec les mots devant chaque champ
+    private String formatSoinsList(List<Soins> soinsList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Soins soin : soinsList) {
+            stringBuilder.append("Nom : ").append(soin.getNomSoin()).append(", ")
+                    .append("Dose : ").append(soin.getDose()).append(", ")
+                    .append("Date : ").append(soin.getDateSoin()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    // Méthode pour formater la liste des vaccins avec les mots devant chaque champ
+    private String formatVaccinsList(List<Vaccins> vaccinsList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Vaccins vaccin : vaccinsList) {
+            stringBuilder.append("Nom : ").append(vaccin.getNomVaccin()).append(",    ")
+                    .append("Dose : ").append(vaccin.getDose()).append("g,    ")
+                    .append("Date : ").append(vaccin.getDateVaccin()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+
     private void popupConfirmationRecoveryDeadAnimal(String numElevage, String numTra) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmation de récupération de l'animal");
@@ -516,5 +421,7 @@ public class DetailsAnimalMortFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 
 }
