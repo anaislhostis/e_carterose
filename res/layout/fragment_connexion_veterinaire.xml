@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/fragment_connexion_veterinaire"
+    android:backgroundTint="@color/ligth_beige"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <!-- Logo -->
+        <ImageView
+            style="@style/LogoContainer"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+
+
+        <TextView
+            android:id="@+id/textContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:textSize="20dp"
+            android:text="Veuillez scanner une carte rose pour accéder aux données d'un animal."
+            android:gravity="center" />
+
+
+
+        <!-- Espacement entre les champs -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+
+            <Button
+                android:id="@+id/ButtonScannerCarteRose"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                style="@style/ButtonEleveur"
+                android:backgroundTint="@color/green"
+                android:text="Scanner une carte rose" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

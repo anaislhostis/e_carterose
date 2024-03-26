@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Custom styles -->
+    <style name="AppBody">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item> <!-- Open Sauce font may need to be loaded separately -->
+    </style>
+
+    <style name="LogoContainer">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+
+    <style name="ButtonContainer">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:radius"> 12dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily"> sans-serif </item>
+    </style>
+
+    <style name ="ButtonEleveur" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ButtonControleur" parent = "Button">
+        <item name="android:backgroundTint">@color/blue</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ButtonVeterinaire" parent="Button">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:textColor">@android:color/black</item>
+
+    </style>
+
+    <style name="ButtonDeclaNais" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ButtonDeclaDec" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ButtonVisu" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ButtonTransfert" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AnimalContainer">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:radius"> 12dp</item>
+        <item name="android:shadowColor">#000000</item> <!-- Couleur de l'ombre -->
+        <item name="android:shadowDx">1</item> <!-- Décalage horizontal de l'ombre -->
+        <item name="android:shadowDy">1</item> <!-- Décalage vertical de l'ombre -->
+    </style>
+
+    <style name ="ButtonEffacerFormulaire" parent = "Button">
+        <item name="android:backgroundTint">@color/grey</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name ="ButtonVoirNotifMort">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <style name="ButtonAnimalDetail" parent = "Button">
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name ="ButtonVaccines">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:textColor">@android:color/black</item>
+
+    </style>
+
+
+</resources>
+
+
+

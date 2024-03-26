@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/ligth_beige"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Champ "Entrez votre numéro d'élevage" -->
+
+        <!-- Logo -->
+        <ImageView
+            style="@style/LogoContainer"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+
+        <!-- Connexion -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Créez votre compte"
+            android:textSize="20sp"
+            android:gravity="top|center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Formulaire -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Champ "Entrez votre numéro d'élevage" -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entrez votre numéro d'élevage :" />
+
+
+            <EditText
+                android:id="@+id/editTextNumeroElevage"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="1234 5678"
+                android:inputType="number" />
+
+
+            <!-- Espacement entre les champs -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <!-- Espacement entre les champs -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entrez votre nom d'élevage :" />
+
+            <EditText
+                android:id="@+id/editTextNomElevage"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="abcdefgh"
+                android:inputType="text" />
+
+
+            <!-- Espacement entre les champs -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+
+
+            <!-- Champ "Entrez votre mot de passe" -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entrez votre mot de passe :" />
+
+            <EditText
+                android:id="@+id/editTextMotDePasse"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="********"
+                android:inputType="textPassword" />
+
+            <!-- Espacement entre les champs et le bouton -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:id="@+id/buttonContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Bouton de soumission -->
+                <Button
+                    android:id="@+id/ButtonCreaCompte"
+                    style="@style/ButtonEleveur"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="Soumettre" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
