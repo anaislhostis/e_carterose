@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TextView_elevage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/ligth_beige"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SelectionEndroitTransfertFragment">
+
+
+    <!-- Titre de la page -->
+    <TextView
+        android:id="@+id/TitreEndroitTransfert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="Transférer un animal dans un nouvel élevage"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+
+    <!-- Numéro de travail -->
+    <TextView
+        android:id="@+id/textViewNumTra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Entrez le numéro de travail de l'animal :"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/editTextNumTra"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 2308"
+        android:maxLength="4"
+        android:inputType="number" />
+
+    <!-- Numéro d'élevage -->
+    <TextView
+        android:id="@+id/textViewNumElevage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="Entrez le numéro d'élevage de l'exploitation d'arrivée :"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/editTextNumElevage"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_shape"
+        android:hint="  ex : 75012345"
+        android:maxLength="8"
+        android:inputType="number" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <!-- Layout horizontal pour les boutons Soumettre et Effacer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <!-- Bouton soumettre -->
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            style="@style/ButtonEleveur"
+            android:text="Soumettre" />
+
+        <!-- Bouton effacer -->
+        <Button
+            android:id="@+id/buttonEffacer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            style="@style/ButtonEffacerFormulaire"
+            android:text="Effacer" />
+
+    </LinearLayout>
+</LinearLayout>
