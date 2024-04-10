@@ -5,9 +5,9 @@ L'évolution de l'agriculture contemporaine est marquée par l'intersection entr
 
 Dans ce contexte, l'initiative e-CarteRose, née lors du Tech’Agri Challenge 2023, se présente comme une réponse novatrice à ces défis. Cette application vise à simplifier et à dématérialiser le processus de gestion des documents d'identité bovins, offrant ainsi une solution moderne et efficace aux éleveurs bovins.
 
-##*Contenu* : 
+## **Contenu** : 
 Ce dépôt GitHub contient les éléments suivants :
 
-*Documentation*: Ce dossier contient toutes les informations nécessaires pour comprendre le projet.
-*Code source*: L'ensemble du code source de l'application est disponible dans ce dossier. Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
+**Documentation**: Ce dossier contient toutes les informations nécessaires pour comprendre le projet.
+**Code source**: L'ensemble du code source de l'application est disponible dans ce dossier. Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
 
