@@ -12,4 +12,4 @@ Ce dépôt GitHub contient les éléments suivants :
 
 **Code source**: L'ensemble du code source de l'application est disponible dans ce dossier (app). Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
 
-**Rapport**: Un rapport de projet est présent dans le dossier, expliquant les objectifs, le fonctionnement et les attentes relatifs à l'application.
+**Rapport**: Un rapport de projet est présent dans le dossier, expliquant les objectifs, le fonctionnement et les attentes relatifs à l'application (rapport).
