@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.e_carterose.app-mergeDebugResources-45:/values-id/values-id.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\anais\\.gradle\\caches\\transforms-3\\a377e45e45800e67b3fd1a905a7545bb\\transformed\\zxing-android-embedded-4.1.0\\res\\values-id\\values-id.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,114,161,293",
+                        "endColumns": "58,46,131,108",
+                        "endOffsets": "109,156,288,397"
+                    }
+                }
+            ]
+        }
+    ]
+}
