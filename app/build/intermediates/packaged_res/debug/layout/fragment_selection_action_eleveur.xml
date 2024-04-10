@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/ligth_beige"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".IndexFragment">
+
+
+
+    <!-- Logo -->
+    <ImageView
+        style="@style/LogoContainer"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo" />
+
+    <!-- Que voulez vous faire -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Que voulez-vous faire ?"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Espacement entre les champs -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+
+    <!-- Boutons -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Bouton Visualisation -->
+        <Button
+            android:id="@+id/ButtonVisu"
+            style="@style/ButtonVisu"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:text="Visualiser l'élevage" />
+
+        <!-- Bouton Déclaration de naissance-->
+        <Button
+            android:id="@+id/ButtonDeclaNais"
+            style="@style/ButtonDeclaNais"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:text="Notifier une naissance" />
+
+        <!-- Bouton Déclaration de décès -->
+        <Button
+            android:id="@+id/ButtonDeclaDec"
+            style="@style/ButtonDeclaDec"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:text="Notifier une mort" />
+
+        <!-- Bouton Transfert -->
+        <Button
+            android:id="@+id/ButtonTransfert"
+            style="@style/ButtonTransfert"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:text="Transférer un animal" />
+    </LinearLayout>
+
+</LinearLayout>
