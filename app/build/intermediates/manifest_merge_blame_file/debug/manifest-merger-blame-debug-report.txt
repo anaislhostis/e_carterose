@@ -1,0 +1,225 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.e_carterose"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="28"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Autorisations -->
+12    <uses-permission android:name="android.permission.CAMERA" />
+12-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:6:5-65
+12-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:6:22-62
+13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+13-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:7:5-80
+13-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:7:22-77
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:8:5-81
+14-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:9:5-67
+15-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:9:22-64
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:10:5-79
+16-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:10:22-76
+17
+18    <uses-feature android:name="android.hardware.camera" />
+18-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:14:5-60
+18-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:14:19-57
+19    <uses-feature android:name="android.hardware.camera.autofocus" />
+19-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:15:5-70
+19-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:15:19-67
+20    <uses-feature android:name="android.hardware.camera.flash" />
+20-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:16:5-66
+20-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:16:19-63
+21    <uses-feature
+21-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:28:5-30:36
+22        android:name="android.hardware.camera.front"
+22-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:29:9-53
+23        android:required="false" />
+23-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:30:9-33
+24    <uses-feature
+24-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:39:5-41:36
+25        android:name="android.hardware.screen.landscape"
+25-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:40:9-57
+26        android:required="false" />
+26-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:41:9-33
+27    <uses-feature
+27-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:42:5-44:36
+28        android:name="android.hardware.wifi"
+28-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:43:9-45
+29        android:required="false" />
+29-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:44:9-33
+30
+31    <permission
+31-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+32        android:name="com.example.e_carterose.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+32-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+33        android:protectionLevel="signature" />
+33-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+34
+35    <uses-permission android:name="com.example.e_carterose.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+35-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+35-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+36
+37    <application
+37-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:20:5-55:19
+38        android:allowBackup="true"
+38-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:21:9-35
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.9.0] C:\Users\anais\.gradle\caches\transforms-3\53bccc341858bb2a0ca40c69bceb7ca4\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+40        android:dataExtractionRules="@xml/data_extraction_rules"
+40-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:22:9-65
+41        android:debuggable="true"
+42        android:extractNativeLibs="false"
+43        android:fullBackupContent="@xml/backup_rules"
+43-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:23:9-54
+44        android:icon="@mipmap/ic_launcher"
+44-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:24:9-43
+45        android:label="E-CarteRose"
+45-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:25:9-36
+46        android:roundIcon="@mipmap/ic_launcher_round"
+46-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:27:9-54
+47        android:supportsRtl="true"
+47-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:28:9-35
+48        android:testOnly="true"
+49        android:theme="@style/Theme.E_carterose"
+49-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:29:9-49
+50        android:usesCleartextTraffic="true" >
+50-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:26:9-44
+51        <activity
+51-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:33:9-43:20
+52            android:name="com.example.e_carterose.MainActivity"
+52-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:34:13-41
+53            android:exported="true"
+53-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:35:13-36
+54            android:label="E-CarteRose"
+54-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:36:13-40
+55            android:theme="@style/Theme.E_carterose" >
+55-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:37:13-53
+56            <intent-filter>
+56-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:38:13-42:29
+57                <action android:name="android.intent.action.MAIN" />
+57-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:39:17-69
+57-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:39:25-66
+58
+59                <category android:name="android.intent.category.LAUNCHER" />
+59-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:41:17-77
+59-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:41:27-74
+60            </intent-filter>
+61        </activity>
+62        <activity
+62-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:45:9-53:20
+63            android:name="com.example.e_carterose.ConnexionTransporteurFragment"
+63-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:46:13-58
+64            android:exported="true" >
+64-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:47:13-36
+65            <intent-filter>
+65-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:48:13-52:29
+66                <action android:name="android.intent.action.VIEW" />
+66-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:49:17-69
+66-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:49:25-66
+67
+68                <category android:name="android.intent.category.DEFAULT" />
+68-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:51:17-76
+68-->C:\Users\anais\AndroidStudioProjects\e_carterose3\app\src\main\AndroidManifest.xml:51:27-73
+69            </intent-filter>
+70        </activity>
+71        <activity
+71-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:47:9-53:63
+72            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+72-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:48:13-74
+73            android:clearTaskOnLaunch="true"
+73-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:49:13-45
+74            android:screenOrientation="sensorLandscape"
+74-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:50:13-56
+75            android:stateNotNeeded="true"
+75-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:51:13-42
+76            android:theme="@style/zxing_CaptureTheme"
+76-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:52:13-54
+77            android:windowSoftInputMode="stateAlwaysHidden" />
+77-->[com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\anais\.gradle\caches\transforms-3\a377e45e45800e67b3fd1a905a7545bb\transformed\zxing-android-embedded-4.1.0\AndroidManifest.xml:53:13-60
+78
+79        <provider
+79-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+80            android:name="androidx.startup.InitializationProvider"
+80-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+81            android:authorities="com.example.e_carterose.androidx-startup"
+81-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+82            android:exported="false" >
+82-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+83            <meta-data
+83-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+84                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+84-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+85                android:value="androidx.startup" />
+85-->[androidx.emoji2:emoji2:1.2.0] C:\Users\anais\.gradle\caches\transforms-3\c297045516deb143ed04a69d0d1206df\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+86            <meta-data
+86-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\anais\.gradle\caches\transforms-3\d9e959d9ef7bf9517acad5ae0d01c366\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+87                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+87-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\anais\.gradle\caches\transforms-3\d9e959d9ef7bf9517acad5ae0d01c366\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+88                android:value="androidx.startup" />
+88-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\anais\.gradle\caches\transforms-3\d9e959d9ef7bf9517acad5ae0d01c366\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+89            <meta-data
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+90                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+91                android:value="androidx.startup" />
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+92        </provider>
+93
+94        <uses-library
+94-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+95            android:name="androidx.window.extensions"
+95-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+96            android:required="false" />
+96-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+97        <uses-library
+97-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+98            android:name="androidx.window.sidecar"
+98-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+99            android:required="false" />
+99-->[androidx.window:window:1.0.0] C:\Users\anais\.gradle\caches\transforms-3\68bf542a164d870964b7e630bd5a7df9\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+100
+101        <receiver
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+102            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+103            android:directBootAware="false"
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+104            android:enabled="true"
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+105            android:exported="true"
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+106            android:permission="android.permission.DUMP" >
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+107            <intent-filter>
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+108                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+109            </intent-filter>
+110            <intent-filter>
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+111                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+112            </intent-filter>
+113            <intent-filter>
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+114                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+115            </intent-filter>
+116            <intent-filter>
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+117                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\anais\.gradle\caches\transforms-3\b94f054b43040ba1922bf81a223aff59\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+118            </intent-filter>
+119        </receiver>
+120    </application>
+121
+122</manifest>
