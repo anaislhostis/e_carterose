@@ -1,0 +1,130 @@
+[
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_veterinaire.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_scan_qr_code_veterinaire.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_scan_qr_code_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\animal_item.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\animal_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_en_transfert_elevage_arrivee.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_elevage_arrivee.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_visualisation_animaux_morts.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_visualisation_animaux_morts.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_creation_profil_eleveur.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_creation_profil_eleveur.xml"
+    },
+    {
+        "merged": "com.example.e_carterose.app-mergeDebugResources-46:/layout/fragment_animaux_en_transport.xml",
+        "source": "com.example.e_carterose.app-main-49:/layout/fragment_animaux_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_animaux_en_transfert.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_animaux_en_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_en_transfert_elevage_depart.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_elevage_depart.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_selection_transport_elevage.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_transport_elevage.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_mort.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_mort.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_selection_action_eleveur.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_action_eleveur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_animaux_en_transport.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_animaux_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_visualisation_elevage.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_visualisation_elevage.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\animal_transport_item.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\animal_transport_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_connexion_veterinaire.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_en_transport.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_selection_endroit_transfert.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_endroit_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_formulaire_naissance.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_naissance.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_connexion_eleveur.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_eleveur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_scan_qr_code.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_scan_qr_code.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_index.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_index.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_formulaire_mort.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_mort.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_formulaire_soins.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_soins.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_en_transfert_abattoir.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_abattoir.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_details_animal_en_transfert.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_connexion_transporteur.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_transporteur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_selection_transport_abattoir.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_transport_abattoir.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_formulaire_vaccins.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_vaccins.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-mergeDebugResources-46:\\layout\\fragment_qr_code.xml",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_qr_code.xml"
+    }
+]

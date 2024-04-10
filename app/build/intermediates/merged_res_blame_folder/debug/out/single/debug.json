@@ -1,0 +1,214 @@
+[
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_en_transfert_elevage_arrivee.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_elevage_arrivee.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_visualisation_animaux_morts.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_visualisation_animaux_morts.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.e_carterose.app-merged_res-47:/layout_fragment_animaux_en_transport.xml.flat",
+        "source": "com.example.e_carterose.app-main-49:/layout/fragment_animaux_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_border_formulaire_date.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\border_formulaire_date.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_mort.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_mort.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_qr_code.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_qr_code.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_formulaire_soins.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_soins.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_border_shape.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\border_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_veterinaire.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_creation_profil_eleveur.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_creation_profil_eleveur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_en_transfert.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_logo.png.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_scan_qr_code.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_scan_qr_code.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_en_transfert_abattoir.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_abattoir.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_index.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_index.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_visualisation_elevage.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_visualisation_elevage.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_formulaire_mort.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_mort.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_search_view_background.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\search_view_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_en_transport.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_animal_transport_item.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\animal_transport_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_connexion_veterinaire.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_formulaire_naissance.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_naissance.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_connexion_eleveur.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_eleveur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_connexion_transporteur.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_connexion_transporteur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_scan_qr_code_veterinaire.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_scan_qr_code_veterinaire.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_selection_endroit_transfert.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_endroit_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_formulaire_vaccins.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_formulaire_vaccins.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_selection_transport_elevage.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_transport_elevage.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_animal_item.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\animal_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_selection_action_eleveur.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_action_eleveur.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_animaux_en_transfert.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_animaux_en_transfert.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_animaux_en_transport.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_animaux_en_transport.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_selection_transport_abattoir.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_selection_transport_abattoir.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\layout_fragment_details_animal_en_transfert_elevage_depart.xml.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\layout\\fragment_details_animal_en_transfert_elevage_depart.xml"
+    },
+    {
+        "merged": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-merged_res-47:\\drawable_icone.png.flat",
+        "source": "C:\\Users\\anais\\.gradle\\daemon\\8.2\\com.example.e_carterose.app-main-49:\\drawable\\icone.png"
+    }
+]
