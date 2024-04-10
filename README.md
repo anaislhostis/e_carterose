@@ -8,7 +8,8 @@ Dans ce contexte, l'initiative e-CarteRose, née lors du Tech’Agri Challenge 2
 ## **Contenu** : 
 Ce dépôt GitHub contient les éléments suivants :
 
-**Documentation**: Ce dossier contient toutes les informations nécessaires pour comprendre le projet.
+**Documentation**: Ce dossier contient toutes les informations nécessaires pour comprendre le projet (ressources).
 
-**Code source**: L'ensemble du code source de l'application est disponible dans ce dossier. Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
+**Code source**: L'ensemble du code source de l'application est disponible dans ce dossier (app). Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
 
+**Rapport**: Un rapport de projet est présent dans le dossier, expliquant les objectifs, le fonctionnement et les attentes relatifs à l'application.
