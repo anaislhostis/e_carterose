@@ -13,3 +13,7 @@ Ce dépôt GitHub contient les éléments suivants :
 **Code source**: L'ensemble du code source de l'application est disponible dans ce dossier (app). Vous y trouverez le code nécessaire pour déployer et exécuter l'application.
 
 **Rapport**: Un rapport de projet ainsi qu'une vidéo expliquant la démarche et montrant des visuels de l'application sont présents dans le dossier, expliquant les objectifs, le fonctionnement et les attentes relatifs à l'application (rapport).
+
+
+Pour un aperçu de l'application, n'hésitez pas à regarder la vidéo suivante : 
+https://youtu.be/RnCuuFDZkTI?si=S5xGOlJ_c85renRl
