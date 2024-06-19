@@ -15,5 +15,4 @@ Ce dépôt GitHub contient les éléments suivants :
 **Rapport**: Un rapport de projet ainsi qu'une vidéo expliquant la démarche et montrant des visuels de l'application sont présents dans le dossier, expliquant les objectifs, le fonctionnement et les attentes relatifs à l'application (rapport).
 
 
-Pour un aperçu de l'application, n'hésitez pas à regarder la vidéo suivante : 
-https://youtu.be/RnCuuFDZkTI?si=S5xGOlJ_c85renRl
+Pour un aperçu de l'application, n'hésitez pas à regarder la vidéo suivante : https://youtu.be/li99I935JpU?si=bIsjg8-g4in8fYMx
